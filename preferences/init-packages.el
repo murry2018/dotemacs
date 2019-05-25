@@ -1,4 +1,4 @@
-;; package archive settings
+﻿;; package archive settings
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
@@ -18,7 +18,7 @@ There are two things you can do about this warning:
                  (cons "gnu" (concat proto "elpa.gnu.org/packages/")))))
 (package-initialize)
 
-(defvar *DMZ* t
+(defvar *DMZ* nil
   "주로 외부 도구의 도움이 필요하여 시스템 설정에 의존하는 경우.
 DMZ에서 활성화되는 패키지:
 - irony
@@ -27,13 +27,12 @@ DMZ에서 활성화되는 패키지:
 - company-irony-c-headers")
 
 (defmacro ensure-package (pkg-var)
-  "Load package. If the package is not installed, install it."
-  `(unless (package-installed-p pkg-var)
-     (unless package-archive-contents
-       (package-refresh-contents))
-     ;; install package
-     (package-install pkg-var))
-  `(require ,pkg-var))
+ `(progn
+    (unless (package-installed-p ,pkg-var)
+      (unless package-archive-contents
+        (package-refresh-contents))
+      (package-install ,pkg-var))
+    (require ,pkg-var)))
 
 ;; ivy : 미니버퍼 tab-completion을 꾸며준다. 
 ;; Manual - http://oremacs.com/swiper/
