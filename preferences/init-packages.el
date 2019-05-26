@@ -27,6 +27,8 @@ DMZ에서 활성화되는 패키지:
 - company-irony-c-headers")
 
 (defmacro ensure-package (pkg-var)
+  "pkg-var을 로딩한다. 없다면 알아서 설치한다.
+예제: (ensure-package 'ivy)"
  `(progn
     (unless (package-installed-p ,pkg-var)
       (unless package-archive-contents
@@ -83,13 +85,11 @@ DMZ에서 활성화되는 패키지:
     (add-hook 'c++-mode-hook 'irony-mode)
     (add-hook 'c-mode-hook 'irony-mode)
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
-    )
-
-  (with-eval-after-load "company"
-    (add-to-list 'company-backends 'company-irony)
-    (add-to-list 'company-backends 'company-irony-c-headers))
-  (with-eval-after-load "flycheck"
-    (add-hook 'irony-mode-hook 'flycheck-irony-setup)))
+    (with-eval-after-load "company"
+      (add-to-list 'company-backends 'company-irony)
+      (add-to-list 'company-backends 'company-irony-c-headers))
+    (with-eval-after-load "flycheck"
+      (add-hook 'irony-mode-hook 'flycheck-irony-setup))))
 
 (defun init-tasks ()
   (ivy-mode 1)
