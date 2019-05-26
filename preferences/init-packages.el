@@ -74,22 +74,26 @@ DMZ에서 활성화되는 패키지:
   ;; irony : 코드 자동완성, 문법검사 기능을 제공하는 프레임워크
   ;; irony, company-irony, company-irony-c-headers
   ;; GitHub(irony) - https://github.com/Sarcasm/irony-mode
-  ;; GitHub(company-~) - https://github.com/Sarcasm/company-irony
-  ;; GitHub(~-c-headres) - https://github.com/hotpxl/company-irony-c-headers
-  ;; GitHub(flycheck-~) - https://github.com/Sarcasm/flycheck-irony
   (ensure-package 'irony)
-  (ensure-package 'company-irony)
-  (ensure-package 'company-irony-c-headers)
-  (ensure-package 'flycheck-irony)
   (with-eval-after-load "irony"
     (add-hook 'c++-mode-hook 'irony-mode)
     (add-hook 'c-mode-hook 'irony-mode)
     (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options)
+    
+    ;; GitHub - https://github.com/Sarcasm/company-irony
+    (ensure-package 'company-irony)
+    ;; GitHub - https://github.com/hotpxl/company-irony-c-headers
+    (ensure-package 'company-irony-c-headers)
     (with-eval-after-load "company"
       (add-to-list 'company-backends 'company-irony)
       (add-to-list 'company-backends 'company-irony-c-headers))
+
+    ;; GitHub - https://github.com/Sarcasm/flycheck-irony
+    (ensure-package 'flycheck-irony)
     (with-eval-after-load "flycheck"
-      (add-hook 'irony-mode-hook 'flycheck-irony-setup))))
+      (add-hook 'irony-mode-hook 'flycheck-irony-setup)
+      (flycheck-add-next-checker
+       'c/c++-cppcheck '(warning . c/c++-googlelint)))))
 
 (defun init-tasks ()
   (ivy-mode 1)
