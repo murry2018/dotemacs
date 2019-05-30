@@ -1,5 +1,6 @@
 ;; Theme setting
 (load-theme 'tango-dark)
+
 ;; CJK font config on gnu/linux system
 (when (and (eq system-type 'gnu/linux)
            (display-graphic-p))
@@ -14,6 +15,9 @@
 
 ;; No Tabs, use spaces
 (setq-default indent-tabs-mode nil)
+
+;; No scrollbar
+(scroll-bar-mode -1)
 
 ;; Allow to move point from window to window using Shift + Arrow.
 (when (fboundp 'windmove-default-keybindings)
