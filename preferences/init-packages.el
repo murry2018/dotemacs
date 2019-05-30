@@ -69,6 +69,15 @@ DMZ에서 활성화되는 패키지:
 ;; GitHub - https://github.com/Lindydancer/highlight-doxygen
 (ensure-package 'highlight-doxygen)
 
+;; Nov.el : Major mode for reading EPUBs
+;; Github : https://github.com/wasamasa/nov.el
+(ensure-package 'nov)
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+(defun nov-tasks ()
+  (local-set-key (kbd "C-j") 'nov-next-document)
+  (local-set-key (kbd "C-k") 'nov-previous-document))
+(add-hook 'nov-mode-hook 'nov-tasks)
+
 ;; 개발용 옵션
 (when *DMZ*
   ;; irony : 코드 자동완성, 문법검사 기능을 제공하는 프레임워크
@@ -91,9 +100,7 @@ DMZ에서 활성화되는 패키지:
     ;; GitHub - https://github.com/Sarcasm/flycheck-irony
     (ensure-package 'flycheck-irony)
     (with-eval-after-load "flycheck"
-      (add-hook 'irony-mode-hook 'flycheck-irony-setup)
-      (flycheck-add-next-checker
-       'c/c++-cppcheck '(warning . c/c++-googlelint)))))
+      (add-hook 'irony-mode-hook 'flycheck-irony-setup))))
 
 (defun init-tasks ()
   (ivy-mode 1)
