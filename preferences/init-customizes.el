@@ -22,3 +22,6 @@
 ;; Allow to move point from window to window using Shift + Arrow.
 (when (fboundp 'windmove-default-keybindings)
   (windmove-default-keybindings))
+
+;; sentences end with single space (setting for M-a M-e)
+(setq sentence-end-double-space nil)
