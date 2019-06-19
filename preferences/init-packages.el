@@ -21,6 +21,8 @@ There are two things you can do about this warning:
 (defvar *DMZ* nil
   "주로 외부 도구의 도움이 필요하여 시스템 설정에 의존하는 경우.
 DMZ에서 활성화되는 패키지:
+- slime
+- ac-slime
 - irony
 - flycheck-irony
 - company-irony
@@ -55,6 +57,10 @@ DMZ에서 활성화되는 패키지:
 ;; Official - https://company-mode.github.io/
 ;; GitHub - https://github.com/company-mode/company-mode
 (ensure-package 'company)
+(with-eval-after-load "company"
+  ;; I will use ac-slime for lisp-mode
+  (add-hook 'slime-mode-hook (lambda () (company-mode -1)))
+  (add-hook 'slime-repl-mode-hook (lambda () (company-mode -1))))
 
 ;; flycheck : 코드 구문을 검사해준다.
 ;; Official - https://www.flycheck.org/en/latest/
@@ -80,6 +86,22 @@ DMZ에서 활성화되는 패키지:
 
 ;; 개발용 옵션
 (when *DMZ*
+  ;; SLIME :
+  (ensure-package 'slime)
+  (with-eval-after-load "slime"
+    (setq inferior-lisp-program "sbcl")
+    (slime-setup '(slime-fancy)))
+  (ensure-package 'ac-slime)
+  (with-eval-after-load "ac-slime"
+    (add-hook 'slime-mode-hook 'set-up-slime-ac)
+    (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+    ;; Note: in my config, auto-complete is used only for slime
+    (with-eval-after-load "auto-complete"
+      (define-key ac-completing-map (kbd "RET") 'ac-complete)
+      (add-hook 'slime-mode-hook 'auto-complete-mode)
+      (add-hook 'slime-repl-mode-hook 'auto-complete-mode)
+      (add-to-list 'ac-modes 'slime-repl-mode)))
+  
   ;; irony : 코드 자동완성, 문법검사 기능을 제공하는 프레임워크
   ;; irony, company-irony, company-irony-c-headers
   ;; GitHub(irony) - https://github.com/Sarcasm/irony-mode
