@@ -86,16 +86,22 @@ DMZ에서 활성화되는 패키지:
 
 ;; 개발용 옵션
 (when *DMZ*
-  ;; SLIME :
+  ;; SLIME : The Superior Lisp Interaction Mode for Emacs
+  ;; Official : https://common-lisp.net/project/slime/
   (ensure-package 'slime)
   (with-eval-after-load "slime"
     (setq inferior-lisp-program "sbcl")
     (slime-setup '(slime-fancy)))
+  
+  ;; ac-slime : Slime completion source for auto-complete package
+  ;; GitHub : https://github.com/purcell/ac-slime
   (ensure-package 'ac-slime)
   (with-eval-after-load "ac-slime"
     (add-hook 'slime-mode-hook 'set-up-slime-ac)
     (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-    ;; Note: in my config, auto-complete is used only for slime
+    ;; Note: In my config, auto-complete is used only for slime
+    ;; Note: Installing ac-slime, package.el automatically installs
+    ;;       auto-complete as a dependency.
     (with-eval-after-load "auto-complete"
       (define-key ac-completing-map (kbd "RET") 'ac-complete)
       (add-hook 'slime-mode-hook 'auto-complete-mode)
