@@ -18,15 +18,13 @@ There are two things you can do about this warning:
                  (cons "gnu" (concat proto "elpa.gnu.org/packages/")))))
 (package-initialize)
 
-(defvar *DMZ* nil
-  "주로 외부 도구의 도움이 필요하여 시스템 설정에 의존하는 경우.
-DMZ에서 활성화되는 패키지:
-- slime
-- ac-slime
-- irony
-- flycheck-irony
-- company-irony
-- company-irony-c-headers")
+;; Packages requires external utilities
+(defvar *slime-switch* nil
+  "slime, ac-slime
+- LISP repl is required.")
+(defvar *irony-switch* nil
+  "irony, flycheck-irony, company-irony, company-irony-c-headers
+- cmake and libclang are required.")
 
 (defmacro ensure-package (pkg-var)
   "pkg-var을 로딩한다. 없다면 알아서 설치한다.
@@ -84,9 +82,8 @@ DMZ에서 활성화되는 패키지:
   (local-set-key (kbd "C-k") 'nov-previous-document))
 (add-hook 'nov-mode-hook 'nov-tasks)
 
-;; 개발용 옵션
-(when *DMZ*
-  ;; SLIME : The Superior Lisp Interaction Mode for Emacs
+(when *slime-switch*
+    ;; SLIME : The Superior Lisp Interaction Mode for Emacs
   ;; Official : https://common-lisp.net/project/slime/
   (ensure-package 'slime)
   (with-eval-after-load "slime"
@@ -106,8 +103,9 @@ DMZ에서 활성화되는 패키지:
       (define-key ac-completing-map (kbd "RET") 'ac-complete)
       (add-hook 'slime-mode-hook 'auto-complete-mode)
       (add-hook 'slime-repl-mode-hook 'auto-complete-mode)
-      (add-to-list 'ac-modes 'slime-repl-mode)))
-  
+      (add-to-list 'ac-modes 'slime-repl-mode))))
+
+(when *irony-switch*
   ;; irony : 코드 자동완성, 문법검사 기능을 제공하는 프레임워크
   ;; irony, company-irony, company-irony-c-headers
   ;; GitHub(irony) - https://github.com/Sarcasm/irony-mode
