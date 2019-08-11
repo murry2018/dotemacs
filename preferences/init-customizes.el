@@ -16,8 +16,13 @@
 ;; No Tabs, use spaces
 (setq-default indent-tabs-mode nil)
 
-;; No scrollbar
-(scroll-bar-mode -1)
+;; No menu bars
+(if (fboundp 'scroll-bar-mode)
+    (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode)
+    (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode)
+    (menu-bar-mode -1))
 
 ;; Allow to move point from window to window using Shift + Arrow.
 (when (fboundp 'windmove-default-keybindings)
