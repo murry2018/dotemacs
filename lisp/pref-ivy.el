@@ -20,7 +20,10 @@
 
 (use-package counsel :ensure t
   :hook (after-init . counsel-mode)
-  :bind ("C-x b" . counsel-switch-buffer))
+  :bind (("C-x b" . counsel-switch-buffer)
+         ("C-c g" . counsel-git)
+         ("C-c j" . counsel-git-grep)
+         ("C-c r" . counsel-rg)))
 
 (use-package swiper :ensure t
   :bind (("C-s" . swiper)
