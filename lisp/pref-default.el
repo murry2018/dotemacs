@@ -89,8 +89,6 @@
 
 ;; Highlight line
 (global-hl-line-mode 1)
-;; https://emacs.stackexchange.com/a/47845
-(set-face-attribute 'highlight nil :background "#3e4446" :foreground 'unspecified)
 
 ;; Use `dired-extra'
 ;;; Activates `dired-do-*' commands
