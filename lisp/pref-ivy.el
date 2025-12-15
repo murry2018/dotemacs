@@ -14,7 +14,6 @@
          ("C-p" . previous-error-no-select))
   :config
   (setopt ivy-use-virtual-buffers 'recentf
-        enable-recursive-minibuffers t
         ivy-magic-tilde nil
         ;; Do not close minibuffer when del pressed with empty minibuffer
         ivy-on-del-error-function #'ignore))
