@@ -36,6 +36,11 @@
   (setopt projectile-enable-caching t
           projectile-indexing-method 'alien))
 
+(use-package magit :ensure t
+  :when (executable-find "git")
+  :config
+  (setopt magit-define-global-key-bindings 'recommended))
+
 ;; This should be the last line
 (require 'pref-site-config nil t)
 
