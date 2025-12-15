@@ -13,6 +13,7 @@
       load-path)
 
 (require 'pref-default)
+(require 'pref-org)
 (require 'pref-ivy)
 (require 'pref-lsp)
 (require 'pref-slime)
