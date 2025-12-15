@@ -17,6 +17,7 @@
 (require 'pref-ivy)
 (require 'pref-lsp)
 (require 'pref-slime)
+(require 'pref-smartparens)
 
 (use-package company :ensure t
   :hook (after-init . global-company-mode))
