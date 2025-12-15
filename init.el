@@ -15,6 +15,7 @@
 (require 'pref-default)
 (require 'pref-ivy)
 (require 'pref-lsp)
+(require 'pref-slime)
 
 (use-package company :ensure t
   :hook (after-init . global-company-mode))
