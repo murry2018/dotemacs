@@ -37,7 +37,8 @@
   (when (and (bound-and-true-p ivy-mode)
              (eq (ivy-state-caller ivy-last) 'swiper))
     (let ((source-window (ivy-state-window ivy-last)))
-      (when (and (window-live-p source-window))
+      (when (and (window-live-p source-window)
+                 (bound-and-true-p lsp-mode))
         (with-selected-window source-window
           (lsp-headerline-check-breadcrumb))))))
 
