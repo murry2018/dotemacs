@@ -17,6 +17,8 @@
 (require 'pref-org)
 (when *use-ivy*
   (require 'pref-ivy))
+(when *use-helm*
+  (require 'pref-helm))
 (require 'pref-lsp)
 (require 'pref-slime)
 (require 'pref-smartparens)

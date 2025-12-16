@@ -7,6 +7,7 @@
 ;; global variables
 ;;
 (defconst *use-ivy* nil)
+(defconst *use-helm* t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Library funcs/macros
