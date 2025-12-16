@@ -8,8 +8,7 @@
 (use-package lsp-mode :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook (((c++-mode c-mode c-ts-mode c++-ts-mode) . lsp)
-         (lsp-moe . lsp-enable-which-key-integeration))
+  :hook (lsp-moe . lsp-enable-which-key-integeration)
   :config
   (setopt lsp-semantic-tokens-enable t)
   :commands lsp)

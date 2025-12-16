@@ -22,6 +22,8 @@
 (require 'pref-lsp)
 (require 'pref-slime)
 (require 'pref-smartparens)
+(require 'pref-treesit)
+(require 'pref-lang-c)
 
 (use-package company :ensure t
   :hook (after-init . global-company-mode))
@@ -46,15 +48,6 @@
   :when (executable-find "git")
   :config
   (setopt magit-define-global-key-bindings 'recommended))
-
-(use-package treesit-fold :ensure t
-  :init
-  (if (fboundp 'global-treesit-fold-indicators-mode)
-      (global-treesit-fold-indicators-mode)
-    (global-treesit-fold-mode))
-  :config
-  (setopt treesit-fold-line-count-show t
-          treesit-fold-line-count-format " <%d lines> "))
 
 ;; This should be the last line
 (require 'pref-site-config nil t)
