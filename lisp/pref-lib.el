@@ -3,6 +3,15 @@
 ;;; Commentary:
 ;;
 ;;; Code:
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; global variables
+;;
+(defconst *use-ivy* nil)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Library funcs/macros
+;;
+
 (defun pref/remove-from-tree (elem tree test)
   "Recursively remove ELEM from TREE using TEST.
 

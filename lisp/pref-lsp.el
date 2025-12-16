@@ -3,6 +3,8 @@
 ;;; Commentary:
 ;;
 ;;; Code:
+(require 'pref-lib)
+
 (use-package lsp-mode :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
@@ -20,6 +22,7 @@
 ;;
 
 (use-package lsp-ivy :ensure t
+  :when *use-ivy*
   :commands lsp-ivy-workspace-symbol)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -49,7 +52,8 @@
 (with-eval-after-load 'ivy
   ;; If performance issues arise with swiper later, it is recommended to
   ;; remove this hook first.
-  (add-hook 'minibuffer-setup-hook #'pref/swiper-breadcrumb-setup))
+  (when *use-ivy*
+    (add-hook 'minibuffer-setup-hook #'pref/swiper-breadcrumb-setup)))
 
 (provide 'pref-lsp)
 ;;; pref-lsp.el ends here

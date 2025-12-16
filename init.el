@@ -12,9 +12,11 @@
 (push (expand-file-name "lisp" user-emacs-directory)
       load-path)
 
+(require 'pref-lib)
 (require 'pref-default)
 (require 'pref-org)
-(require 'pref-ivy)
+(when *use-ivy*
+  (require 'pref-ivy))
 (require 'pref-lsp)
 (require 'pref-slime)
 (require 'pref-smartparens)
