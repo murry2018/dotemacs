@@ -15,10 +15,7 @@
 (require 'pref-lib)
 (require 'pref-default)
 (require 'pref-org)
-(when *use-ivy*
-  (require 'pref-ivy))
-(when *use-helm*
-  (require 'pref-helm))
+(require 'pref-ivy)
 (require 'pref-lsp)
 (require 'pref-slime)
 (require 'pref-smartparens)

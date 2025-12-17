@@ -21,7 +21,7 @@
 ;;
 
 (use-package lsp-ivy :ensure t
-  :when *use-ivy*
+  :after ivy
   :commands lsp-ivy-workspace-symbol)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -51,8 +51,7 @@
 (with-eval-after-load 'ivy
   ;; If performance issues arise with swiper later, it is recommended to
   ;; remove this hook first.
-  (when *use-ivy*
-    (add-hook 'minibuffer-setup-hook #'pref/swiper-breadcrumb-setup)))
+  (add-hook 'minibuffer-setup-hook #'pref/swiper-breadcrumb-setup))
 
 (provide 'pref-lsp)
 ;;; pref-lsp.el ends here
