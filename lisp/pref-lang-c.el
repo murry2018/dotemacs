@@ -84,10 +84,10 @@ patterns (see https://github.com/clangd/clangd/issues/719).")))))
 (setopt c-default-style "pref/c")
 
 (use-package c-ts-mode
+  :defer t
   :config
   (setopt c-ts-mode-indent-offset 4
           c-ts-mode-indent-style 'k&r))
-
 
 (provide 'pref-lang-c)
 ;;; pref-lang-c.el ends here
