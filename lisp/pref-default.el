@@ -15,6 +15,10 @@
 ;; Turn off scrollbar and toolbar
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(when (fboundp 'menu-bar-mode)
+  ;; Disable menu-bar-mode in terminal mode.
+  ;; Since F10 is often captured by terminal emulator.
+  (menu-bar-mode (if (display-graphic-p) 1 -1)))
 
 ;; Frame background (for dark background terminal)
 ;;; The default setting is 'light, which doesn't fit since most modern terminal
