@@ -86,7 +86,7 @@ patterns (see https://github.com/clangd/clangd/issues/719).")))))
 (use-package c-ts-mode
   :config
   (setopt c-ts-mode-indent-offset 4
-          c-ts-mode-indent-style "k&r"))
+          c-ts-mode-indent-style 'k&r))
 
 
 (provide 'pref-lang-c)
