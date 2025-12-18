@@ -42,14 +42,24 @@
   (setopt projectile-enable-caching t
           projectile-indexing-method 'alien))
 
+;; magit: The standard Git interface for Emacs.
+;; (Status: C-x g; Help: '?' inside magit buffer for command list)
 (use-package magit :ensure t
   :when (executable-find "git")
   :config
   (setopt magit-define-global-key-bindings 'recommended))
 
+;; wgrep: Edit grep/ivy-occur buffers directly and save to files.
+;; (Start: C-c C-p, Apply: C-x C-s, Abort: C-c C-k)
 (use-package wgrep :ensure t)
 
+;; iedit: Edit all occurrences of a symbol simultaneously.
+;; (Toggle: C-; on a target symbol)
 (use-package iedit :ensure t)
+
+;; transpose-frame: Swap x/y direction of window splits or rotate them.
+;; (M-x transpose-frame, M-x rotate-frame)
+(use-package transpose-frame :ensure t)
 
 ;; This should be the last line
 (require 'pref-site-config nil t)
