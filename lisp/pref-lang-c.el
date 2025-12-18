@@ -73,7 +73,10 @@ patterns (see https://github.com/clangd/clangd/issues/719).")))))
   :if (locate-library "ccls"))
 
 (use-package lsp-mode
-  :hook ((c++-mode c-mode c-ts-mode c++-ts-mode) . lsp))
+  :hook ((c++-mode c-mode c-ts-mode c++-ts-mode) . lsp)
+  :config
+  (setopt lsp-enable-on-type-formatting nil
+          lsp-enable-indentation nil))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Syntax-aware Indentation Configuration
