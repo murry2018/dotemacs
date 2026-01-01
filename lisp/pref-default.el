@@ -57,6 +57,10 @@
 (add-hook 'after-change-major-mode-hook
   #'pref/enable-line-numbers)
 
+;; Use `electric-pair-mode'
+;;; Automatically inserts matching parens(brackets, quotes, etc.)
+(electric-pair-mode 1)
+
 ;; Use `show-paren-mode'
 ;;; Highlights matching parentheses/brackets/braces
 (show-paren-mode 1)

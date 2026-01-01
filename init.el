@@ -16,12 +16,11 @@
 (require 'pref-default)
 (require 'pref-org)
 (require 'pref-ivy)
+(require 'pref-evil)
 (require 'pref-lsp)
 (require 'pref-slime)
-(require 'pref-smartparens)
 (require 'pref-treesit)
 (require 'pref-lang-c)
-(require 'pref-centaur-tabs)
 
 (use-package company :ensure t
   :hook (after-init . global-company-mode))
