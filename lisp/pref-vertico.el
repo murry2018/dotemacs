@@ -38,7 +38,7 @@
           completion-category-defaults nil))
 
 (use-package embark :ensure t
-  :bind (("C-." . embark-act)
+  :bind (("C-c ." . embark-act)
          :map minibuffer-local-map
             ("C-c C-o" . embark-export)))
 
