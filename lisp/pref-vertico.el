@@ -6,6 +6,8 @@
 
 (use-package vertico :ensure t
   :ensure t
+  :bind (:map vertico-map
+          ("C-l" . vertico-directory-up))
   :init
   (vertico-mode 1)
   :config
