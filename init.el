@@ -64,6 +64,11 @@
 ;; (M-x transpose-frame, M-x rotate-frame)
 (use-package transpose-frame :ensure t)
 
+(use-package ace-window :ensure t
+  :bind ("M-o" . ace-window)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?z ?x ?c ?v)))
+
 ;; This should be the last line
 (require 'pref-site-config nil t)
 
