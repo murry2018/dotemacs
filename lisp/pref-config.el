@@ -5,6 +5,7 @@
 ;;; Code:
 (defvar pref/*use-ivy* nil)
 (defvar pref/*use-vertico* t)
+(defvar pref/*use-treesitter* nil)
 
 (provide 'pref-config)
 ;;; pref-config.el ends here

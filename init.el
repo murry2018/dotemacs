@@ -25,7 +25,8 @@
 (require 'pref-evil)
 (require 'pref-lsp)
 (require 'pref-slime)
-(require 'pref-treesit)
+(when pref/*use-treesitter*
+  (require 'pref-treesit))
 (require 'pref-lang-c)
 
 (use-package flycheck :ensure t
