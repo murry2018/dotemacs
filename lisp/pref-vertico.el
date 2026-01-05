@@ -32,7 +32,9 @@
 (use-package orderless :ensure t
   :init
   (setopt completion-styles '(orderless basic)
-          completion-category-defaults nil))
+          completion-category-defaults nil)
+  (add-to-list 'completion-category-overrides
+    '(symbol (styles . (basic)))))
 
 (use-package embark :ensure t
   :bind (("C-c ." . embark-act)
