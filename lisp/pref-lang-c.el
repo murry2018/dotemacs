@@ -113,6 +113,10 @@ patterns (see https://github.com/clangd/clangd/issues/719).")))))
       ((parent-is "argument_list") prev-sibling 0)
       ((match nil "parameter_list" nil 1 1) parent-bol c-ts-mode-indent-offset)
       ((parent-is "parameter_list") prev-sibling 0)
+
+      ((parent-is "case_statement") standalone-parent c-ts-mode-indent-offset)
+      ((parent-is "compound_statement") standalone-parent c-ts-mode-indent-offset)
+      ((parent-is "if_statement") standalone-parent c-ts-mode-indent-offset)
       
       ;;; Rules for preprocessors conditionals
       ((and (node-is "preproc.*")) no-indent 0)

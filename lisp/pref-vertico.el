@@ -5,7 +5,6 @@
 ;;; Code:
 
 (use-package vertico :ensure t
-  :ensure t
   :bind (:map vertico-map
           ("C-l" . vertico-directory-up))
   :init
@@ -14,14 +13,12 @@
   (setopt vertico-cycle t
           vertico-resize nil))
 
-(use-package marginalia
-  :ensure t
+(use-package marginalia :ensure t
   :init
   (setopt marginalia-align 'right)
   (marginalia-mode))
 
-(use-package consult
-  :ensure t
+(use-package consult :ensure t
   :bind (("C-x b" . consult-buffer)
          ("C-s" . consult-line)
          ("C-r" . consult-line)
