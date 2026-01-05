@@ -17,6 +17,7 @@
 (require 'pref-default)
 (require 'pref-ui)
 (require 'pref-org)
+(require 'pref-completion)
 (when pref/*use-ivy*
   (require 'pref-ivy))
 (when pref/*use-vertico*
@@ -26,9 +27,6 @@
 (require 'pref-slime)
 (require 'pref-treesit)
 (require 'pref-lang-c)
-
-(use-package company :ensure t
-  :hook (after-init . global-company-mode))
 
 (use-package flycheck :ensure t
   :hook (after-init . global-flycheck-mode)
