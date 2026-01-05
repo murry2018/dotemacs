@@ -12,21 +12,6 @@
 (setopt fill-column 78)			; default: 72
 (global-display-fill-column-indicator-mode)
 
-;; Turn off scrollbar and toolbar
-(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(when (fboundp 'menu-bar-mode)
-  ;; Disable menu-bar-mode in terminal mode.
-  ;; Since F10 is often captured by terminal emulator.
-  (menu-bar-mode (if (display-graphic-p) 1 -1)))
-
-;; Frame background (for dark background terminal)
-;;; The default setting is 'light, which doesn't fit since most modern terminal
-;;; emulators use a dark background.
-(when (not (display-graphic-p))
-  (setopt frame-background-mode 'dark)
-  (mapc 'frame-set-background-mode (frame-list)))
-
 ;; Elisp appearance
 ;;; These functions (or keywords) are indented *as if they were macros* because
 ;;; their arguments or argument lists are typically long, often necessitating
@@ -47,15 +32,6 @@
 ;; Use `ibuffer' instead of `list-buffers'
 ;;; A more powerful buffer manager with keybindings and filters
 (keymap-global-set "C-x C-b" 'ibuffer)
-
-;; Use `display-line-numbers-mode' only on file-backed buffers
-(defun pref/enable-line-numbers ()
-  "Use `display-line-numbers-mode' only on file-backed buffers."
-  (when buffer-file-name
-    (display-line-numbers-mode 1)))
-
-(add-hook 'after-change-major-mode-hook
-  #'pref/enable-line-numbers)
 
 ;; Use `electric-pair-mode'
 ;;; Automatically inserts matching parens(brackets, quotes, etc.)

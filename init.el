@@ -15,6 +15,7 @@
 (require 'pref-config)
 (require 'pref-lib)
 (require 'pref-default)
+(require 'pref-ui)
 (require 'pref-org)
 (when pref/*use-ivy*
   (require 'pref-ivy))
