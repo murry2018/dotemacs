@@ -3,7 +3,6 @@
 ;;; Code:
 
 (setopt default-input-method "korean-hangul")
-(set-frame-font "IBM Plex Mono-11")
 
 (use-package color-theme-sanityinc-tomorrow :ensure t)
 
