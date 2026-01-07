@@ -13,7 +13,11 @@
 (use-package orderless :ensure t
   :init
   (setopt completion-styles '(basic orderless)
-          completion-category-defaults nil))
+          completion-category-defaults nil)
+  (add-to-list 'completion-category-overrides
+    '(file (styles . (basic partial-completion))))
+  (add-to-list 'completion-category-overrides
+    '(consult-location (styles . (orderless)))))
 
 (declare-function evil-global-set-key "evil")
 
