@@ -19,10 +19,13 @@
         ivy-on-del-error-function #'ignore))
 
 (defun pref.inner/find-fd-executable ()
+  "Return the path to the `fd' executable.
+Checks for both `fd' and `fdfind' (used in some Linux distros)."
   (or (executable-find "fd")
       (executable-find "fdfind")))
 
 (defun pref.inner/counsel-everything ()
+  "Search all files in the current directory using `find'."
   (interactive)
   (let* ((cands (split-string
                      (shell-command-to-string "find .") "\n" t)))
