@@ -139,7 +139,8 @@ Confirmed working with consult.el version 20260105.1624"
   :bind (("C-x b" . consult-buffer)
          ("C-s" . pref.inner/consult-symbol-search)
          ("C-c F" . pref.inner/consult-find-up)
-         ("C-c l" . consult-line))
+         ("C-c l" . consult-line)
+         ("C-c '" . consult-imenu))
   :init
   (keymap-global-set "C-c f"
                      (if (or (executable-find "fd")

@@ -59,7 +59,8 @@
 
 ;; iedit: Edit all occurrences of a symbol simultaneously.
 ;; (Toggle: C-; on a target symbol)
-(use-package iedit :ensure t)
+(use-package iedit :ensure t
+  :if pref/*use-iedit*)
 
 ;; transpose-frame: Swap x/y direction of window splits or rotate them.
 ;; (M-x transpose-frame, M-x rotate-frame)
