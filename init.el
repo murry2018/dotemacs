@@ -17,6 +17,7 @@
 (require 'pref-default)
 (require 'pref-ui)
 (require 'pref-org)
+(require 'pref-tramp)
 (require 'pref-completion)
 (when pref/*use-ivy*
   (require 'pref-ivy))
