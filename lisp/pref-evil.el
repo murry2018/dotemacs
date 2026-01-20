@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;
 ;;; Code:
+(declare-function evil-select-search-module "evil-search")
+
 (use-package evil-surround :ensure t
   :after evil
   :config
@@ -20,7 +22,8 @@
           evil-want-C-u-scroll t
           display-line-numbers-type 'relative)
   :config
-  (evil-mode 1))
+  (evil-mode 1)
+  (evil-select-search-module 'evil-search-module 'evil-search))
 
 (provide 'pref-evil)
 ;;; pref-evil.el ends here
