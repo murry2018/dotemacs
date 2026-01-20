@@ -20,7 +20,8 @@
           evil-want-integration t
           evil-want-C-d-scroll t
           evil-want-C-u-scroll t
-          display-line-numbers-type 'relative)
+          display-line-numbers-type 'relative
+          evil-symbol-word-search t)
   :config
   (evil-mode 1)
   (evil-select-search-module 'evil-search-module 'evil-search))
