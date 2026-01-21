@@ -13,8 +13,6 @@
   (require 'meow)
   (setopt meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (meow-motion-define-key
-   '("j" . meow-next)
-   '("k" . meow-prev)
    '("<escape>" . ignore))
   (meow-normal-define-key
    '("0" . meow-expand-0)
