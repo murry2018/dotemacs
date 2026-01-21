@@ -25,6 +25,9 @@
 ;; Encoding
 (prefer-coding-system 'utf-8)		; default: system-dependent
 
+;; Enable disabled commands
+(put 'narrow-to-region 'disabled nil)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Default Modes
 ;;
