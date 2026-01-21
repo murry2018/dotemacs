@@ -10,7 +10,8 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook (lsp-moe . lsp-enable-which-key-integeration)
   :config
-  (setopt lsp-semantic-tokens-enable t)
+  (setopt lsp-semantic-tokens-enable t
+          lsp-diagnostics-provider :flymake)
   :commands lsp)
 
 (use-package lsp-ui :ensure t

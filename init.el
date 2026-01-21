@@ -9,8 +9,9 @@
   (load custom-file))
 
 ;; pref scripts
-(push (expand-file-name "lisp" user-emacs-directory)
-      load-path)
+(let ((pref-path (expand-file-name "lisp" user-emacs-directory)))
+  (push pref-path load-path)
+  (push pref-path elisp-flymake-byte-compile-load-path))
 
 (require 'pref-config)
 (require 'pref-lib)
@@ -29,14 +30,6 @@
 (when pref/*use-treesitter*
   (require 'pref-treesit))
 (require 'pref-lang-c)
-
-(use-package flycheck :ensure t
-  :hook (after-init . global-flycheck-mode)
-  :config
-  ;; Make Flycheck aware of Emacs Lisp files found within the current
-  ;; `load-path'. This prevents false warnings when checking Elisp code
-  ;; that uses 'require'.
-  (setopt flycheck-emacs-lisp-load-path 'inherit))
 
 (use-package projectile :ensure t
   :hook (after-init . projectile-mode)
@@ -71,9 +64,13 @@
   :config
   (setq aw-keys '(?a ?s ?d ?f ?z ?x ?c ?v)))
 
+(use-package flymake :ensure nil
+  :hook (emacs-lisp-mode)
+  :commands (flymake-mode))
+
 ;; This should be the last line
 (require 'pref-site-config nil t)
 
 ;; Local Variables:
-;; flycheck-disabled-checkers: (emacs-lisp-checkdoc)
+;; flymake-diagnostic-functions: (elisp-flymake-byte-compile)
 ;; End:
