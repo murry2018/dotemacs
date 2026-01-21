@@ -24,7 +24,10 @@
   (require 'pref-ivy))
 (when pref/*use-vertico*
   (require 'pref-vertico))
-(require 'pref-evil)
+(when pref/*use-evil*
+  (require 'pref-evil))
+(when pref/*use-meow*
+  (require 'pref-meow))
 (require 'pref-lsp)
 (require 'pref-slime)
 (when pref/*use-treesitter*

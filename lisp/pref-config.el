@@ -7,6 +7,8 @@
 (defvar pref/*use-vertico* t)
 (defvar pref/*use-treesitter* nil)
 (defvar pref/*use-iedit* nil)
+(defvar pref/*use-evil* nil)
+(defvar pref/*use-meow* t)
 
 (provide 'pref-config)
 ;;; pref-config.el ends here
