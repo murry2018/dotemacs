@@ -74,6 +74,8 @@
   :hook (emacs-lisp-mode)
   :commands (flymake-mode))
 
+(use-package surround :ensure t)
+
 ;; This should be the last line
 (require 'pref-site-config nil t)
 

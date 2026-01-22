@@ -8,7 +8,11 @@
 
 (use-package meow :ensure t
   :init
-  (setopt meow-use-clipboard t)
+  (setopt meow-use-clipboard t
+          ;; Vim like scrolling
+          scroll-step 1
+          scroll-margin 3
+          scroll-conservatively 2)
   :config
   (require 'meow)
   (setopt meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
@@ -90,6 +94,17 @@
    '("0" . meow-digit-argument)
    '("/" . meow-keypad-describe-key)
    '("?" . meow-cheatsheet))
+  (keymap-global-set "C-c w" #'save-buffer)
+  (keymap-global-set "C-c ." #'find-file)
+  (with-eval-after-load "ace-window"
+    (keymap-global-set "C-c o" #'ace-window))
+  (with-eval-after-load "consult"
+    (keymap-global-set "C-c s" #'pref.inner/consult-symbol-search))
+  (with-eval-after-load "avy"
+    (keymap-global-set "C-c ;" #'avy-goto-char-timer))
+  (with-eval-after-load "surround"
+    (defalias 'surround-keymap surround-keymap)
+    (meow-normal-define-key '("S" . surround-keymap)))
   (meow-global-mode 1))
 
 (provide 'pref-meow)
