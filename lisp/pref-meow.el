@@ -6,7 +6,25 @@
 (declare-function meow-motion-define-key "meow")
 (declare-function meow-normal-define-key "meow")
 
+(defvar pref.inner/*saved-input-method* nil
+  "Store the input method active before switching mode.
+This variable holds the name of input method(e.g. \"korean-hangul\").")
+
+(defun pref.inner/save-input-method ()
+  "Save current input method and disable it."
+  (when current-input-method
+    (setf pref.inner/*saved-input-method* current-input-method)
+    (toggle-input-method)))
+
+(defun pref.inner/load-input-method ()
+  "Restore the previously saved input method."
+  (when pref.inner/*saved-input-method*
+    (set-input-method pref.inner/*saved-input-method*))
+  (setf pref.inner/*saved-input-method* nil))
+
 (use-package meow :ensure t
+  :hook ((meow-insert-enter-hook . pref.inner/load-input-method)
+         (meow-insert-exit-hook . pref.inner/save-input-method))
   :init
   (setopt meow-use-clipboard t
           ;; Vim like scrolling
