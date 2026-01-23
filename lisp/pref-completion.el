@@ -27,11 +27,8 @@ using the remainder of the string."
 ;; Package configurations
 ;;
 
-(use-package company :ensure t
-  :hook (after-init . global-company-mode)
-  :bind (:map company-active-map
-          ("C-n" . company-select-next)
-          ("C-p" . company-select-previous)))
+(use-package corfu :ensure t
+  :init (global-corfu-mode))
 
 (use-package orderless :ensure t
   :init
