@@ -23,8 +23,8 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
   (setf pref.inner/*saved-input-method* nil))
 
 (use-package meow :ensure t
-  :hook ((meow-insert-enter-hook . pref.inner/load-input-method)
-         (meow-insert-exit-hook . pref.inner/save-input-method))
+  :hook ((meow-insert-enter . pref.inner/load-input-method)
+         (meow-insert-exit . pref.inner/save-input-method))
   :init
   (setopt meow-use-clipboard t
           ;; Vim like scrolling
