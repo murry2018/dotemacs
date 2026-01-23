@@ -37,6 +37,10 @@
   (require 'pref-treesit))
 (require 'pref-lang-c)
 
+(use-package flymake :ensure nil
+  :hook (emacs-lisp-mode)
+  :commands (flymake-mode))
+
 (use-package projectile :ensure t
   :hook (after-init . projectile-mode)
   :bind (:map projectile-mode-map
@@ -65,16 +69,20 @@
 ;; (M-x transpose-frame, M-x rotate-frame)
 (use-package transpose-frame :ensure t)
 
+;; ace-window: Switch windows using visual character hints
+;; (Jump: M-o)
 (use-package ace-window :ensure t
   :bind ("M-o" . ace-window)
   :config
   (setq aw-keys '(?a ?s ?d ?f ?z ?x ?c ?v)))
 
-(use-package flymake :ensure nil
-  :hook (emacs-lisp-mode)
-  :commands (flymake-mode))
-
+;; surround: Vim-like surround operations for delimiters (parens, quotes).
+;; (Usage: Bind `surround-keymap' to a key to use)
 (use-package surround :ensure t)
+
+;; fold-this: Fold the selected region of text.
+;; (Fold: M-x fold-this, Unfold: M-x fold-this-unfold-at-point)
+(use-package fold-this :ensure t)
 
 ;; This should be the last line
 (require 'pref-site-config nil t)
