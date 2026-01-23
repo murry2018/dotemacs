@@ -113,17 +113,19 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
    '("/" . meow-keypad-describe-key)
    '("?" . meow-cheatsheet))
   (keymap-global-set "C-c w" #'save-buffer)
+  (keymap-global-set "C-c q" #'save-buffers-kill-terminal)
   (keymap-global-set "C-c ." #'find-file)
-  (with-eval-after-load "ace-window"
+  (when (fboundp 'ace-window)
     (keymap-global-set "C-c o" #'ace-window))
-  (with-eval-after-load "consult"
+  (when (fboundp 'pref.inner/consult-symbol-search)
     (keymap-global-set "C-c s" #'pref.inner/consult-symbol-search))
-  (with-eval-after-load "avy"
+  (when (fboundp 'avy-goto-char-timer)
     (keymap-global-set "C-c ;" #'avy-goto-char-timer))
   (with-eval-after-load "surround"
     (defalias 'surround-keymap surround-keymap)
     (meow-normal-define-key '("S" . surround-keymap)))
-  (meow-global-mode 1))
+  (meow-global-mode 1)
+  :demand t)
 
 (provide 'pref-meow)
 ;;; pref-meow.el ends here
