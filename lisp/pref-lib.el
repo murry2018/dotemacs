@@ -1,4 +1,4 @@
-;;; pref-lib --- functions/macros library
+;;; pref-lib --- functions/macros library -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;
@@ -18,6 +18,13 @@ Example:
                     (cons (pref/remove-from-tree elem e test) acc)
                   (if (funcall test e elem) acc (cons e acc)))))
     (reverse (cl-reduce #'rec tree :initial-value nil))))
+
+(defun pref/inverse-cmd (command)
+  "Return a command that calls COMMAND with a negative prefix argument."
+  #'(lambda ()
+      (interactive)
+      (let ((current-prefix-arg -1))
+        (call-interactively command))))
 
 (provide 'pref-lib)
 ;;; pref-lib.el ends here
