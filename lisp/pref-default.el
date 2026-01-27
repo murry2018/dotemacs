@@ -79,7 +79,8 @@
 
 ;; Use `dired-extra'
 ;;; Activates `dired-do-*' commands
-(require 'dired-x)
+(with-eval-after-load 'dired
+  (require 'dired-x))
 
 ;; Which-key mode
 ;;; Shows a pop-up with key completions after a prefix key
