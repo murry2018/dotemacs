@@ -28,9 +28,6 @@
   (require 'pref-evil))
 (when pref/*use-meow*
   (require 'pref-meow))
-(when pref/*use-god*
-  (use-package god-mode :ensure t
-    :bind ("<escape>" . god-local-mode)))
 (require 'pref-lsp)
 (require 'pref-slime)
 (when pref/*use-treesitter*
