@@ -36,6 +36,7 @@
 (when pref/*use-treesitter*
   (require 'pref-treesit))
 (require 'pref-lang-c)
+(require 'pref-lang-clj)
 
 (use-package flymake :ensure nil
   :hook (emacs-lisp-mode)
