@@ -24,6 +24,14 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
     (set-input-method pref.inner/*saved-input-method*))
   (setf pref.inner/*saved-input-method* nil))
 
+(use-package expand-region :ensure t
+  :config
+  (setopt er/try-expand-list
+    '(er/mark-inside-quotes
+      er/mark-outside-quotes
+      er/mark-inside-pairs
+      er/mark-outside-pairs)))
+
 (use-package meow :ensure t
   :hook ((meow-insert-enter . pref.inner/load-input-method)
          (meow-insert-exit . pref.inner/save-input-method))
@@ -142,6 +150,8 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
   (with-eval-after-load "surround"
     (defalias 'surround-keymap surround-keymap)
     (meow-normal-define-key '("S" . surround-keymap)))
+  (with-eval-after-load "expand-region"
+    (meow-normal-define-key '("b" . er/expand-region)))
   (meow-global-mode 1)
   :demand t)
 
