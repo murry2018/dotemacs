@@ -30,9 +30,10 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
   :init
   (setopt meow-use-clipboard t
           ;; Vim like scrolling
-          scroll-step 1
-          scroll-margin 3
-          scroll-conservatively 2)
+          ;; scroll-step 1
+          ;; scroll-margin 3
+          scroll-conservatively 5
+          )
   :config
   (require 'meow)
   (setopt meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
@@ -41,14 +42,14 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
                      '(pair ("<") (">")))
 
   (setopt meow-char-thing-table
-    '((?f . round)
-      (?d . square)
-      (?s . curly)
-      (?a . angle)
-      (?r . string)
-      (?v . paragraph)
-      (?c . line)
-      (?x . buffer)))
+    '((?\( . round)
+      (?\[ . square)
+      (?\{ . curly)
+      (?< . angle)
+      (?\" . string)
+      (?p . paragraph)
+      (?l . line)
+      (?b . buffer)))
 
   (meow-motion-define-key
    '("<escape>" . ignore))
@@ -65,6 +66,8 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
     '("8" . meow-expand-8)
     '("9" . meow-expand-9)
     '("'" . meow-reverse)
+    '("q" . meow-quit)
+    '("-" . negative-argument)
 
                                         ; movement
     '("i" . meow-prev)
@@ -72,7 +75,7 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
     '("j" . meow-left)
     '("l" . meow-right)
 
-    '("y" . meow-search)
+    '("n" . meow-search)
     '("/" . meow-visit)
     `("?" . ,(pref/inverse-cmd #'meow-visit))
 
@@ -82,70 +85,50 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
     '("J" . meow-left-expand)
     '("L" . meow-right-expand)
 
-    '("u" . meow-back-word)
-    '("U" . meow-back-symbol)
-    '("o" . meow-next-word)
-    '("O" . meow-next-symbol)
+    '("h" . meow-back-word)
+    '("H" . meow-back-symbol)
+    '(";" . meow-next-word)
+    '(":" . meow-next-symbol)
 
-    '("a" . meow-mark-word)
-    '("A" . meow-mark-symbol)
-    '("s" . meow-line)
-    '("S" . meow-goto-line)
-    '("w" . meow-block)
-    '("q" . meow-join)
-    '("g" . meow-grab)
-    '("G" . meow-pop-grab)
-    '("m" . meow-swap-grab)
-    '("M" . meow-sync-grab)
-    '("p" . meow-cancel-selection)
-    '("P" . meow-pop-selection)
+    '("w" . meow-mark-word)
+    '("W" . meow-mark-symbol)
+    '("b" . meow-block)
+    '("m" . meow-line)
+    '("a" . meow-join)
+    '("s" . meow-grab)
+    ;; '("Z" . meow-pop-grab)
+    '("G" . meow-cancel-selection)
+    '("g" . meow-pop-selection)
 
-    '("x" . meow-till)
-    `("X" . ,(pref/inverse-cmd #'meow-till))
-    '("z" . meow-find)
-    `("Z" . ,(pref/inverse-cmd #'meow-find))
+    '("t" . meow-till)
+    `("T" . meow-till-expand)
+    '("f" . meow-find)
+    `("F" . meow-find-expand)
 
-    '("," . meow-beginning-of-thing)
-    '("." . meow-end-of-thing)
-    '("<" . meow-inner-of-thing)
-    '(">" . meow-bounds-of-thing)
+    '("<" . meow-beginning-of-thing)
+    '(">" . meow-end-of-thing)
+    '("," . meow-inner-of-thing)
+    '("." . meow-bounds-of-thing)
 
                                         ; editing
     '("d" . meow-kill)
-    '("f" . meow-change)
-    '("t" . meow-delete)
-    '("T" . meow-backspace)
-    '("c" . meow-save)
-    '("v" . meow-yank)
-    '("V" . meow-yank-pop)
+    '("c" . meow-change)
+    '("x" . meow-delete)
+    '("X" . meow-backward-delete)
+    '("y" . meow-save)
+    '("p" . meow-yank)
+    '("P" . meow-yank-pop)
 
     '("e" . meow-insert)
-    '("E" . meow-open-above)
     '("r" . meow-append)
-    '("R" . meow-open-below)
+    '("o" . meow-open-below)
+    '("O" . meow-open-above)
 
-    '("h" . undo-only)
-    '("H" . undo-redo)
-
-    '("b" . open-line)
-    '("B" . split-line)
+    '("u" . undo-only)
+    '("U" . undo-redo)
 
     '("[" . indent-rigidly-left-to-tab-stop)
     '("]" . indent-rigidly-right-to-tab-stop)
-
-                                        ; prefix n
-    '("nf" . meow-comment)
-    '("nr" . kmacro-start-macro-or-insert-counter)
-    '("ne" . kmacro-end-or-call-macro)
-    ;; ...etc
-
-                                        ; prefix ;
-    '(";F" . save-some-buffers)
-    '(";/" . meow-query-replace-regexp)
-    '(";w" . save-buffer)
-    '(";q" . quit-window)
-    '(";j" . recenter-top-bottom)
-    ;; ... etc
 
     ;; ignore escape
     '("<escape>" . ignore))
@@ -154,10 +137,11 @@ This variable holds the name of input method(e.g. \"korean-hangul\").")
   (when (fboundp 'pref.inner/consult-symbol-search)
     (keymap-global-set "C-c s" #'pref.inner/consult-symbol-search))
   (when (fboundp 'avy-goto-char-timer)
+    (meow-normal-define-key '("z" . avy-goto-char-2))
     (keymap-global-set "C-c ;" #'avy-goto-char-timer))
   (with-eval-after-load "surround"
     (defalias 'surround-keymap surround-keymap)
-    (meow-normal-define-key '(":" . surround-keymap)))
+    (meow-normal-define-key '("S" . surround-keymap)))
   (meow-global-mode 1)
   :demand t)
 
