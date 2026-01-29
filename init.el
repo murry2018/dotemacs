@@ -75,7 +75,15 @@
 (use-package ace-window :ensure t
   :bind ("M-o" . ace-window)
   :config
-  (setq aw-keys '(?a ?s ?d ?f ?z ?x ?c ?v)))
+  (setq aw-keys '(?a ?s ?d ?f ?z ?x ?c ?v))
+  (let* ((is-gui (display-graphic-p))
+         (font-height (if is-gui 2.5 1.0))
+         (fg-color (if is-gui "chartreuse" "green")))
+    (set-face-attribute 
+     'aw-leading-char-face nil
+     :foreground fg-color :height font-height :weight 'bold
+     :box (when is-gui ; `box' might not work on terminal
+            '(:line-width 2 :color "grey75" :style released-button)))))
 
 ;; surround: Vim-like surround operations for delimiters (parens, quotes).
 ;; (Usage: Bind `surround-keymap' to a key to use)
