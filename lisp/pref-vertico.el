@@ -117,6 +117,10 @@ Confirmed working with consult.el version 20260105.1624"
           (setq continue nil)))))
     nil))
 
+(defun pref.inner/dont-check-remote (check)
+  (unless (file-remote-p default-directory)
+    (consult--default-project-function check)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package configurations
 ;;
@@ -151,7 +155,9 @@ Confirmed working with consult.el version 20260105.1624"
   (keymap-global-set "C-c r"
                      (if (executable-find "rg")
                          #'consult-ripgrep
-                       #'consult-grep)))
+                       #'consult-grep))
+  :config
+  (setopt consult-project-function #'pref.inner/dont-check-remote))
 
 (use-package embark :ensure t
   :bind (("C-c ." . embark-act)

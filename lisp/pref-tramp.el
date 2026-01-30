@@ -34,7 +34,9 @@
   (connection-local-set-profile-variables
    'pref.inner/tramp-profile-sudo
    ;; Disable auto-saving on `sudo' sessions.
-   '((buffer-auto-save-file-name . nil)))
+   '((buffer-auto-save-file-name . nil)
+     ;; Disable internal VC.
+     (vc-handled-backends . nil)))
   (connection-local-set-profiles
    '(:application tramp :protocol "sudo")
    'pref.inner/tramp-profile-sudo)
