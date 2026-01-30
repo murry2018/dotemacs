@@ -11,6 +11,9 @@
 
 (use-package tramp
   :ensure nil
+  :init
+  (setopt tramp-persistency-file-name
+    (expand-file-name "tramp-cache.el" user-emacs-directory))
   :config
   (setopt
       ;; Disable version control to avoid delays

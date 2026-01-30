@@ -92,7 +92,3 @@
 
 ;; This should be the last line
 (require 'pref-site-config nil t)
-
-;; Local Variables:
-;; flymake-diagnostic-functions: (elisp-flymake-byte-compile)
-;; End:
