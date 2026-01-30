@@ -20,10 +20,7 @@
 (require 'pref-org)
 (require 'pref-tramp)
 (require 'pref-completion)
-(when pref/*use-ivy*
-  (require 'pref-ivy))
-(when pref/*use-vertico*
-  (require 'pref-vertico))
+(require 'pref-vertico)
 (when pref/*use-evil*
   (require 'pref-evil))
 (when pref/*use-meow*
