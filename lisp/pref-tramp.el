@@ -54,7 +54,9 @@
 ;; Use a package with TRAMP specific implementation of high-level operations.
 (use-package tramp-hlo :ensure t
   :config
-  (tramp-hlo-setup))
+  (require 'tramp)
+  (when (fboundp 'tramp-add-external-operation)
+    (tramp-hlo-setup)))
 
 (provide 'pref-tramp)
 ;;; pref-tramp.el ends here
