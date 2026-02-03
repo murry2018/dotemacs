@@ -37,8 +37,50 @@
 ;;   b / B     = er/expand-region / er/contract-region
 ;;
 ;;; Code:
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Evil Core
+;;
 (declare-function evil-select-search-module "evil-search")
 
+(defun pref.inner/after-evil-mode ()
+  "Actions after enter `evil-mode'."
+  (electric-pair-local-mode -1))
+
+(use-package evil :ensure t
+  :hook ((prog-mode . evil-local-mode)
+         (evil-local-mode . pref.inner/after-evil-mode))
+  :init
+  (setopt evil-want-keybinding nil
+          evil-want-integration t
+          ;; evil-want-C-d-scroll t
+          ;; evil-want-C-u-scroll t
+          display-line-numbers-type 'relative
+          evil-symbol-word-search t)
+  :config
+  (evil-select-search-module 'evil-search-module 'evil-search))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Evil On Special Buffers
+;;
+(defun pref.inner/enable-evil-on-splash ()
+  "Enable `evil-motion' on *GNU Emacs* buffer."
+  (when (and (string= (buffer-name) "*GNU Emacs*")
+             (not evil-local-mode))
+    (evil-local-mode 1)
+    (evil-motion-state)))
+
+(use-package evil :ensure nil
+  :hook (((help-mode apropos-mode text-mode) . evil-local-mode)
+         (buffer-list-update . pref.inner/enable-evil-on-splash))
+  :config
+  ;; `motion-mode' on help buffers
+  (evil-set-initial-state 'help-mode 'motion)
+  (evil-set-initial-state 'apropos-mode 'motion))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Third-party
+;;
 (use-package evil-surround :ensure t
   :after evil
   :hook (evil-local-mode . evil-surround-mode))
@@ -51,19 +93,9 @@
       er/mark-inside-pairs
       er/mark-outside-pairs)))
 
-(use-package evil :ensure t
-  :hook (prog-mode . evil-local-mode)
-  :init
-  (setopt evil-want-keybinding nil
-          evil-want-integration t
-          ;; evil-want-C-d-scroll t
-          ;; evil-want-C-u-scroll t
-          display-line-numbers-type 'relative
-          evil-symbol-word-search t)
-  (electric-pair-mode -1)
-  :config
-  (evil-select-search-module 'evil-search-module 'evil-search))
-
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Keymap
+;;
 (defvar pref.general/evil-semicolon-map nil)
 (defvar pref.general/evil-h-map nil)
 
@@ -75,6 +107,24 @@
   (setf pref.general/evil-h-map (make-sparse-keymap))
   :config
   (general-evil-setup t)
+
+  ;; leader key: \
+  (with-eval-after-load 'general
+    (general-create-definer pref.evil/leader
+      :states '(normal visual motion)
+      :keymaps 'override
+      :prefix "\\"
+      :non-normal-prefix "\\"))
+
+  (pref.evil/leader
+   "f" 'find-file
+   "b" 'switch-to-buffer)
+
+  ;; SPC / C-SPC instead of C-u / C-d
+  (general-define-key
+   :states '(normal motion visual)
+   "SPC"   #'evil-scroll-down
+   "C-SPC" #'evil-scroll-up)
 
   (general-define-key
    :states '(normal motion visual operator)
@@ -150,7 +200,7 @@
    :states 'visual
    "E" 'evil-insert-line
    "R" 'evil-append-line
-   "w" 'evil-visual-exchange-corners ; change cursor directionu
+   "w" 'evil-visual-exchange-corners ; change cursor direction
    )
 
   (defalias 'evil-inner-text-object-prefix
@@ -164,15 +214,27 @@
    "r" 'evil-outer-text-object-prefix)
 
   (general-unbind :states 'normal "S")
-
+  (general-unbind :states 'motion "e")
   (general-define-key
    :states '(motion normal visual)
    "b" nil "B" nil)
+
   (with-eval-after-load 'expand-region
     (general-define-key
      :states '(normal visual)
      "b" #'er/expand-region
-     "B" #'er/contract-region)))
+     "B" #'er/contract-region))
+
+  (with-eval-after-load 'ace-window
+    (pref.evil/leader
+      "o" #'ace-window))
+  (with-eval-after-load 'avy
+    (pref.evil/leader
+     ";" #'avy-goto-char-timer))
+  (with-eval-after-load 'consult
+    (pref.evil/leader
+     "." #'consult-recent-file
+     "b" #'consult-buffer)))
 
 (provide 'pref-evil)
 ;;; pref-evil.el ends here

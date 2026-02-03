@@ -68,6 +68,7 @@
 ;; (Jump: M-o)
 (use-package ace-window :ensure t
   :bind ("M-o" . ace-window)
+  :demand t
   :config
   (setq aw-keys '(?a ?s ?d ?f ?z ?x ?c ?v))
   (let* ((is-gui (display-graphic-p))
