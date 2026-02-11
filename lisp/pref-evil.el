@@ -229,6 +229,9 @@
     (pref.evil/leader
       "o" #'ace-window))
   (with-eval-after-load 'avy
+    (general-define-key
+     :states '(insert motion normal)
+     "C-c ;" 'avy-goto-char-timer)
     (pref.evil/leader
      ";" #'avy-goto-char-timer))
   (with-eval-after-load 'consult
