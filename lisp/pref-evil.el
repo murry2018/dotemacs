@@ -284,6 +284,18 @@
      "b" #'er/expand-region
      "B" #'er/contract-region))
 
+  (with-eval-after-load 'corfu
+    ;; https://github.com/minad/corfu/issues/12#issuecomment-868926083
+    (general-def
+      :keymaps 'completion-in-region-mode
+      :definer 'minor-mode
+      :states 'insert
+      :predicate 'corfu-mode
+      "C-n" 'corfu-next
+      "C-p" 'corfu-previous
+      "C-l" 'corfu-complete
+      "<escape>" 'corfu-quit
+      "<return>" 'corfu-insert))
   (with-eval-after-load 'ace-window
     (pref.evil/leader
       "o" #'ace-window))

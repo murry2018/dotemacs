@@ -1,4 +1,4 @@
-;;; pref-completion --- Company and Orderless configuration
+;;; pref-completion --- Corfu and Orderless configuration
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

@@ -34,14 +34,6 @@ Filter out programs(`:prog' member) that are not executable."
 ;;
 
 (defvar *slime-contribs* '(slime-fancy slime-tramp))
-(with-eval-after-load 'slime-company
-  (add-to-list '*slime-contribs* 'slime-company t))
-
-(use-package slime-company :ensure t
-  :config
-  (setopt slime-company-completion 'fuzzy
-          slime-company-after-completion 'slime-company-just-one-space
-          slime-enable-evaluate-in-emacs t))
 
 (use-package slime :ensure t
   :init
