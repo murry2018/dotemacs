@@ -41,12 +41,5 @@ using the remainder of the string."
   (setopt orderless-style-dispatchers
     '(pref.inner/orderless-dispatch-if-bang)))
 
-
-(declare-function evil-global-set-key "evil")
-
-(with-eval-after-load 'evil
-  (evil-global-set-key 'insert (kbd "C-n") #'company-complete)
-  (evil-global-set-key 'insert (kbd "C-p") #'company-complete))
-
 (provide 'pref-completion)
 ;;; pref-completion.el ends here

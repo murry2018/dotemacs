@@ -70,9 +70,19 @@
     (evil-local-mode 1)
     (evil-motion-state)))
 
+(defun pref.inner/enable-evil-on-file-backed-fundamental ()
+  "Enable `evil-normal' on file-backed `fundamental-mode' buffer."
+  (when (and (eq major-mode 'fundamental-mode)
+             (buffer-file-name)
+             (not (minibufferp))
+             (not evil-local-mode))
+    (evil-local-mode 1)
+    (evil-normal-state)))
+
 (use-package evil :ensure nil
   :hook (((help-mode apropos-mode text-mode) . evil-local-mode)
-         (buffer-list-update . pref.inner/enable-evil-on-splash))
+         (buffer-list-update . pref.inner/enable-evil-on-splash)
+         (after-change-major-mode . pref.inner/enable-evil-on-file-backed-fundamental))
   :config
   ;; `motion-mode' on help buffers
   (evil-set-initial-state 'help-mode 'motion)
@@ -92,6 +102,41 @@
       er/mark-outside-quotes
       er/mark-inside-pairs
       er/mark-outside-pairs)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Custom evil command
+;;
+(with-eval-after-load "evil"
+  (evil-define-motion pref.evil/forward-char-wrap (count)
+    "Like `l' with `whichwrap+=l' set."
+    :type inclusive
+    (let ((count (or count 1)))
+      (dotimes (_ count)
+        (if (evil-eolp)
+            (progn (forward-line 1) (beginning-of-line))
+          (evil-forward-char 1)))))
+
+  (evil-define-motion pref.evil/backward-char-wrap (count)
+    "Like `h' with `whichwrap+=h' set."
+    :type inclusive
+    (let ((count (or count 1)))
+      (dotimes (_ count)
+        (if (bolp)
+            (progn (forward-line -1) (end-of-line))
+          (evil-backward-char 1)))))
+
+  (evil-define-motion pref.evil/move-space-right (count)
+    "Vim's `Wh', repeating COUNT times."
+    :type inclusive
+    (evil-forward-WORD-begin count)
+    (pref.evil/backward-char-wrap))
+
+  (evil-define-motion pref.evil/move-space-left (count)
+    "Vim's `gEl', repeating COUNT times."
+    :type inclusive
+    (evil-backward-WORD-end count)
+    (pref.evil/forward-char-wrap))
+  ) ;; with-eval-after-load "evil"
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Keymap
@@ -120,15 +165,13 @@
    "f" 'find-file
    "b" 'switch-to-buffer)
 
-  ;; SPC / C-SPC instead of C-u / C-d
-  (general-define-key
-   :states '(normal motion visual)
-   "SPC"   #'evil-scroll-down
-   "C-SPC" #'evil-scroll-up)
-
   (general-define-key
    :states '(normal motion visual operator)
    ";" pref.general/evil-semicolon-map)
+
+  (general-define-key
+   :states '(normal motion visual operator)
+   "h" pref.general/evil-h-map)
 
   (general-define-key
    :keymaps 'pref.general/evil-semicolon-map
@@ -138,11 +181,8 @@
    "}" 'evil-next-close-brace
    "'" 'evil-next-mark-line
    "`" 'evil-next-mark
+   "SPC" #'pref.evil/move-space-right
    "s" 'evil-next-flyspell-error)
-
-  (general-define-key
-   :states '(normal motion visual operator)
-   "h" pref.general/evil-h-map)
 
   (general-define-key
    :keymaps 'pref.general/evil-h-map
@@ -152,6 +192,7 @@
    "{" 'evil-previous-open-brace
    "'" 'evil-previous-mark-line
    "`" 'evil-previous-mark
+   "SPC" #'pref.evil/move-space-left
    "s" 'evil-prev-flyspell-error)
 
   (general-define-key
@@ -161,6 +202,12 @@
    "k" 'evil-next-line
    "i" 'evil-previous-line
    "l" 'evil-forward-char
+   "gi" 'evil-previous-visual-line
+   "gk" 'evil-next-visual-line
+   "J" 'evil-window-top
+   "L" 'evil-window-bottom
+   "I" 'evil-lookup
+   "K" 'evil-join
 
    ;; word/symbol movement (u: prev / o: next)
    "u" 'evil-backward-word-begin
@@ -168,11 +215,23 @@
    "o" 'evil-forward-word-end
    "O" 'evil-forward-WORD-end
 
-   ;; matching paren(orig. `%')
-   "a" 'evil-jump-item
+   ;; movement inside whitespace
+   "a" #'pref.evil/move-space-right
+   "A" #'pref.evil/move-space-left
+
    ;; repeating f/t (,: prev / .: next)
    "." 'evil-repeat-find-char
    )
+
+  (general-define-key
+   :states '(normal)
+   "[" #'evil-shift-left-line
+   "]" #'evil-shift-right-line)
+
+  (general-define-key
+   :states '(visual)
+   "[" #'evil-shift-left
+   "]" #'evil-shift-right)
 
   (general-define-key
    :states 'normal
