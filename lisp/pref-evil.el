@@ -88,6 +88,17 @@
   (evil-set-initial-state 'help-mode 'motion)
   (evil-set-initial-state 'apropos-mode 'motion))
 
+(defun pref.evil/toggle-emacs-normal-state ()
+  "Toggle between `evil-emacs-state' and `evil-normal-state'."
+  (when evil-local-mode
+    (if (evil-emacs-state-p)
+        (evil-normal-state)
+      (evil-emacs-state))))
+
+(use-package magit :ensure nil
+  :hook ((magit-blame-mode magit-blob-mode)
+         . pref.evil/toggle-emacs-normal-state))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Third-party
 ;;
@@ -162,8 +173,9 @@
       :non-normal-prefix "\\"))
 
   (pref.evil/leader
-   "f" 'find-file
-   "b" 'switch-to-buffer)
+    "q" 'quit-window
+    "f" 'find-file
+    "b" 'switch-to-buffer)
 
   (general-define-key
    :states '(normal motion visual operator)
@@ -274,6 +286,8 @@
 
   (general-unbind :states 'normal "S")
   (general-unbind :states 'motion "e")
+  (general-unbind :states 'insert "S-<left>")
+  (general-unbind :states 'insert "S-<right>")
   (general-define-key
    :states '(motion normal visual)
    "b" nil "B" nil)
@@ -296,15 +310,18 @@
       "C-l" 'corfu-complete
       "<escape>" 'corfu-quit
       "<return>" 'corfu-insert))
+
   (with-eval-after-load 'ace-window
     (pref.evil/leader
       "o" #'ace-window))
+
   (with-eval-after-load 'avy
     (general-define-key
      :states '(insert motion normal)
      "C-c ;" 'avy-goto-char-timer)
     (pref.evil/leader
      ";" #'avy-goto-char-timer))
+
   (with-eval-after-load 'consult
     (pref.evil/leader
      "." #'consult-recent-file
