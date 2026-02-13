@@ -49,7 +49,7 @@
   :config
   (setopt magit-define-global-key-bindings 'recommended))
 
-;; wgrep: Edit grep/ivy-occur buffers directly and save to files.
+;; wgrep: Edit grep/occur buffers directly and save to files.
 ;; (Start: C-c C-p, Apply: C-x C-s, Abort: C-c C-k)
 (use-package wgrep :ensure t)
 

@@ -1,4 +1,4 @@
-;;; pref-ivy --- Configurations for treesit.el
+;;; pref-treesit --- Configurations for treesit.el
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;
