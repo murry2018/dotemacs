@@ -45,7 +45,8 @@
 
 (defun pref.inner/after-evil-mode ()
   "Actions after enter `evil-mode'."
-  (electric-pair-local-mode -1))
+  (electric-pair-local-mode -1)
+  (evil-esc-mode 1))
 
 (use-package evil :ensure t
   :hook ((prog-mode . evil-local-mode)
