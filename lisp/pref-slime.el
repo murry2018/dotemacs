@@ -1,4 +1,4 @@
-;;; pref-slime --- SLIME configuration
+;;; pref-slime --- SLIME configuration  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

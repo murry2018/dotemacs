@@ -1,4 +1,4 @@
-;;; pref-completion --- Corfu and Orderless configuration
+;;; pref-completion --- Corfu and Orderless configuration  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

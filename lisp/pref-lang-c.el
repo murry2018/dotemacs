@@ -1,4 +1,4 @@
-;;; pref-lang-c.el --- config for c/c++
+;;; pref-lang-c.el --- config for c/c++  -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 (require 'pref-lib)
@@ -67,7 +67,8 @@ Clangd version 18 (the default on Ubuntu 22.04) is not recommended
 due to a severe memory usage issue when encountering specific header file
 patterns (see https://github.com/clangd/clangd/issues/719).")))))
 
-(use-package ccls
+(use-package ccls :ensure nil
+  ;; :straight nil
   ;; We do not ensure ccls here, as it appears to take precedence
   ;; over clangd if installed.
   :if (locate-library "ccls"))

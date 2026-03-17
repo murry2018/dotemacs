@@ -1,4 +1,4 @@
-;;; pref-site-config.el --- config for each site
+;;; pref-site-config.el --- config for each site  -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 

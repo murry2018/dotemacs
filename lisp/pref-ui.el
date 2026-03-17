@@ -1,4 +1,4 @@
-;;; pref-ui.el --- config for basic UI
+;;; pref-ui.el --- config for basic UI  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;; Code:

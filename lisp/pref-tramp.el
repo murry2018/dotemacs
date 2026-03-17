@@ -1,4 +1,4 @@
-;;; pref-tramp --- Configurations for tramp
+;;; pref-tramp --- Configurations for tramp  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

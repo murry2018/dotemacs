@@ -1,4 +1,4 @@
-;;; pref-treesit --- Configurations for treesit.el
+;;; pref-treesit --- Configurations for treesit.el  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

@@ -1,4 +1,4 @@
-;;; pref-evil --- Summary: Configurations for evil-mode
+;;; pref-evil --- Summary: Configurations for evil-mode  -*- lexical-binding: t -*-
 ;;; Commentary:
 ;; Movement:
 ;;   j k i l = left / down / up / right
@@ -37,6 +37,7 @@
 ;;   b / B     = er/expand-region / er/contract-region
 ;;
 ;;; Code:
+(require 'pref-lib)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Evil Core
@@ -54,8 +55,6 @@
   :init
   (setopt evil-want-keybinding nil
           evil-want-integration t
-          ;; evil-want-C-d-scroll t
-          ;; evil-want-C-u-scroll t
           display-line-numbers-type 'relative
           evil-symbol-word-search t)
   :config
@@ -105,7 +104,19 @@
 ;;
 (use-package evil-surround :ensure t
   :after evil
-  :hook (evil-local-mode . evil-surround-mode))
+  :hook (evil-local-mode . evil-surround-mode)
+  :config
+  ;; https://github.com/emacs-evil/evil-surround/issues/86
+  (pref/add-to-alist 'default
+   'evil-surround-pairs-alist
+    ?\( '("(" . ")")
+    ?\[ '("[" . "]")
+    ?\{ '("{" . "}")
+    ?\< '("<" . ">")
+    ?\) '("( " . " )")
+    ?\] '("[ " . " ]")
+    ?\} '("{ " . " }")
+    ?\> '("< " . " >")))
 
 (use-package expand-region :ensure t
   :config

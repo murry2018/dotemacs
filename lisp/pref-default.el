@@ -1,4 +1,4 @@
-;;; pref-default --- Better, modernized defaults
+;;; pref-default --- Better, modernized defaults  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

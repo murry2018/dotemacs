@@ -1,4 +1,4 @@
-;;; pref-lang-clj.el --- config for clojure
+;;; pref-lang-clj.el --- config for clojure  -*- lexical-binding: t -*-
 ;;; Commentary:
 ;;; Code:
 (use-package cider :ensure t)

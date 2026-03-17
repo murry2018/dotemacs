@@ -1,4 +1,4 @@
-;;; pref-vertico --- Configurations for vertico
+;;; pref-vertico --- Configurations for vertico  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

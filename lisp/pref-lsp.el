@@ -1,4 +1,4 @@
-;;; pref-lsp --- Configurations for lsp-mode
+;;; pref-lsp --- Configurations for lsp-mode  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

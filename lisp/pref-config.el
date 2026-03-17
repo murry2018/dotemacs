@@ -1,4 +1,4 @@
-;;; pref-config --- Configurations for configuration
+;;; pref-config --- Configurations for configuration  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

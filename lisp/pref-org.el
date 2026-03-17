@@ -1,4 +1,4 @@
-;;; pref-org --- Configurations for org
+;;; pref-org --- Configurations for org  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;

@@ -1,4 +1,4 @@
-;;; pref-lib --- functions/macros library -*- lexical-binding: t -*-
+;;; pref-lib --- functions/macros library  -*- lexical-binding: t -*-
 ;;; Author: JY Lee
 ;;; Commentary:
 ;;
@@ -25,6 +25,39 @@ Example:
       (interactive)
       (let ((current-prefix-arg -1))
         (call-interactively command))))
+
+(defun pref/add-to-alist (scope alist-symbol &rest pairs)
+  "Add or replace multiple key/value PAIRS into the alist bound to ALIST-SYMBOL.
+
+SCOPE must be either 'local or 'default, determining which value to modify.
+ALIST-SYMBOL must be a symbol whose value is an alist.
+PAIRS is a sequence of KEY VALUE arguments.
+
+Example:
+  (pref/add-to-alist
+   'default
+   'evil-surround-pairs-alist
+   ?\( '(\"(\" . \")\")
+   ?\) '(\"( \" . \" )\"))"
+  (unless (memq scope '(local default))
+    (error "SCOPE must be either 'local or 'default"))
+  (unless (and (symbolp alist-symbol)
+               (boundp alist-symbol))
+    (error "ALIST-SYMBOL must be a bound symbol"))
+
+  (let ((alist (if (eq scope 'default)
+                   (default-value alist-symbol)
+                 (symbol-value alist-symbol))))
+    
+    (while pairs
+      (let ((key (pop pairs))
+            (val (pop pairs)))
+        (setq alist (assq-delete-all key alist))
+        (push (cons key val) alist)))
+    
+    (if (eq scope 'default)
+        (set-default alist-symbol alist)
+      (set alist-symbol alist))))
 
 (provide 'pref-lib)
 ;;; pref-lib.el ends here
