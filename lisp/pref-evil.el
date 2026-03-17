@@ -334,6 +334,11 @@
     (pref.evil/leader
      ";" #'avy-goto-char-timer))
 
+  (with-eval-after-load 'evil-surround
+    (general-define-key
+     :states '(visual)
+     "S" 'evil-surround-region))
+
   (with-eval-after-load 'consult
     (pref.evil/leader
      "." #'consult-recent-file

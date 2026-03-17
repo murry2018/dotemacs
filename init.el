@@ -30,6 +30,7 @@
   (require 'pref-treesit))
 (require 'pref-lang-c)
 (require 'pref-lang-clj)
+(require 'pref-lang-pta)
 
 (use-package flymake :ensure nil
   :hook (emacs-lisp-mode)
