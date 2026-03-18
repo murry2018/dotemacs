@@ -20,6 +20,7 @@
 (require 'pref-ui)
 (require 'pref-org)
 (require 'pref-tramp)
+(require 'pref-vterm)
 (require 'pref-completion)
 (require 'pref-vertico)
 (when pref/*use-evil*
