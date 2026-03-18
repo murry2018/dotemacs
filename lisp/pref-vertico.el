@@ -160,8 +160,7 @@ Confirmed working with consult.el version 20260105.1624"
   (setopt consult-project-function #'pref.inner/dont-check-remote))
 
 (use-package embark :ensure t
-  :bind (("C-c ." . embark-act)
-         :map minibuffer-local-map
+  :bind (:map minibuffer-local-map
             ("C-c C-o" . embark-export)))
 
 (use-package embark-consult :ensure t

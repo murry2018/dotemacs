@@ -23,8 +23,6 @@
 (require 'pref-vterm)
 (require 'pref-completion)
 (require 'pref-vertico)
-(when pref/*use-evil*
-  (require 'pref-evil))
 (require 'pref-lsp)
 (require 'pref-slime)
 (when pref/*use-treesitter*
@@ -32,6 +30,9 @@
 (require 'pref-lang-c)
 (require 'pref-lang-clj)
 (require 'pref-lang-pta)
+(if pref/*use-evil*
+    (require 'pref-evil)
+  (require 'pref-keymap))
 
 (use-package flymake :ensure nil
   :hook (emacs-lisp-mode)
