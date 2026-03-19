@@ -169,6 +169,7 @@
 
 (use-package general :ensure t
   :after evil
+  :if pref.evil/*use-ijkl*
   :init
   (require 'general)
   (setf pref.general/evil-semicolon-map (make-sparse-keymap))

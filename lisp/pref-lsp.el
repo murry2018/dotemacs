@@ -60,7 +60,7 @@ If nil (default), the list is initialized to nil in each new session.")
 (defun pref.inner/should-suppress-lsp-p (&rest _args)
   "Return t if the current buffer's file path is in the disable list.
 Used as a :before-until advice for `lsp' and `lsp-deferred'."
-  (when-let ((name (buffer-file-name)))
+  (when-let* ((name (buffer-file-name)))
     (let ((suppress (cl-some (lambda (dir) (string-prefix-p dir name))
                              pref/*lsp-disable-dirs*)))
       (when suppress

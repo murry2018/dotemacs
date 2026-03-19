@@ -14,6 +14,8 @@
   :init
   (setopt tramp-persistency-file-name
     (expand-file-name "tramp-cache.el" user-emacs-directory))
+  (with-eval-after-load 'tramp-sh
+    (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
   :config
   (setopt
       ;; Disable version control to avoid delays

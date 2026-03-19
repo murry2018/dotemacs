@@ -132,6 +132,9 @@
     ;; Allow recursive use of the minibuffer
     ;; e.g. calling `M-x' or `describe-variable' while inside `find-file'
     enable-recursive-minibuffers t
+
+    ;; gmane url changed
+    gnus-select-method '(nntp "news.gmane.io")
     )
 
 (provide 'pref-default)

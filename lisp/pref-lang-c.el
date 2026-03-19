@@ -50,7 +50,7 @@ using `executable-find'. Returns nil if no suitable executable is found."
 
 ;; for clangd user
 (with-eval-after-load 'lsp-mode
-  (when-let ((clangd-default (executable-find pref/*clangd-command*)))
+  (when-let* ((clangd-default (executable-find pref/*clangd-command*)))
     (setf pref.inner/*clangd-version-cmd-result*
           (shell-command-to-string
            (concat (shell-quote-argument clangd-default) " --version")))
@@ -132,7 +132,7 @@ patterns (see https://github.com/clangd/clangd/issues/719).")))))
   (if (and (eq c-ts-mode-indent-style #'pref.style/pref-lang-c)
            (or (save-excursion (back-to-indentation)
                                (looking-at-p "#"))
-               (when-let ((node (treesit-node-at (point))))
+               (when-let* ((node (treesit-node-at (point))))
                  (equal (treesit-node-type node)
                         "preproc_arg"))))
       (tab-to-tab-stop)
