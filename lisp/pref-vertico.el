@@ -118,6 +118,7 @@ Confirmed working with consult.el version 20260105.1624"
     nil))
 
 (defun pref.inner/dont-check-remote (check)
+  "Run project CHECK unless `default-directory' is remote."
   (unless (file-remote-p default-directory)
     (consult--default-project-function check)))
 

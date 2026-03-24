@@ -3,6 +3,8 @@
 ;;; Code:
 (require 'pref-config)
 
+(declare-function pref.inner/consult-symbol-search "pref-vertico")
+
 (use-package hydra :ensure t)
 
 (keymap-global-set "C-s" #'isearch-forward)

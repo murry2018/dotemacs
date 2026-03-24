@@ -4,6 +4,8 @@
 ;;
 ;;; Code:
 
+(declare-function tramp-hlo-setup "tramp-hlo")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Speed up TRAMP
 ;; See: https://www.gnu.org/software/tramp/#Frequently-Asked-Questions-1

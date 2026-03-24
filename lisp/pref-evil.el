@@ -40,10 +40,36 @@
 (require 'pref-lib)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Evil Core
+;; Forward Declarations
 ;;
 (declare-function evil-select-search-module "evil-search")
+(declare-function evil-append "evil" (&optional count))
+(declare-function evil-append-line "evil" (&optional count))
+(declare-function evil-backward-WORD-begin "evil" (&optional count))
+(declare-function evil-backward-WORD-end "evil" (&optional count))
+(declare-function evil-backward-char "evil" (&optional count crosslines noerror))
+(declare-function evil-eolp "evil")
+(declare-function evil-emacs-state "evil")
+(declare-function evil-emacs-state-p "evil")
+(declare-function evil-esc-mode "evil-escape" (&optional arg))
+(declare-function evil-forward-WORD-begin "evil" (&optional count))
+(declare-function evil-forward-char "evil" (&optional count crosslines noerror))
+(declare-function evil-motion-state "evil")
+(declare-function evil-normal-state "evil")
+(declare-function evil-set-initial-state "evil-core" (mode state))
+(declare-function evil-shift-left "evil" (beg end &optional count preserve-empty))
+(declare-function evil-shift-left-line "evil" (&optional count))
+(declare-function evil-shift-right "evil" (beg end &optional count preserve-empty))
+(declare-function evil-shift-right-line "evil" (&optional count))
+(declare-function pref.evil/backward-char-wrap "pref-evil" (&optional count))
+(declare-function pref.evil/forward-char-wrap "pref-evil" (&optional count))
+(declare-function pref.evil/leader "pref-evil" (&rest args))
+(declare-function pref.evil/move-space-left "pref-evil" (&optional count))
+(declare-function pref.evil/move-space-right "pref-evil" (&optional count))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Evil Core
+;;
 (defun pref.inner/after-evil-mode ()
   "Actions after enter `evil-mode'."
   (electric-pair-local-mode -1)
@@ -178,12 +204,11 @@
   (general-evil-setup t)
 
   ;; leader key: \
-  (with-eval-after-load 'general
-    (general-create-definer pref.evil/leader
-      :states '(normal visual motion)
-      :keymaps 'override
-      :prefix "\\"
-      :non-normal-prefix "\\"))
+  (general-create-definer pref.evil/leader
+    :states '(normal visual motion)
+    :keymaps 'override
+    :prefix "\\"
+    :non-normal-prefix "\\")
 
   (pref.evil/leader
     "q" 'quit-window

@@ -1,4 +1,6 @@
-;; -*- lexical-binding: t -*-
+;;; init.el --- Emacs configuration -*- lexical-binding: t -*-
+;;; Commentary:
+;;; Code:
 ;; MELPA
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -76,7 +78,7 @@
   (let* ((is-gui (display-graphic-p))
          (font-height (if is-gui 2.5 1.0))
          (fg-color (if is-gui "chartreuse" "green")))
-    (set-face-attribute 
+    (set-face-attribute
      'aw-leading-char-face nil
      :foreground fg-color :height font-height :weight 'bold
      :box (when is-gui ; `box' might not work on terminal
@@ -92,3 +94,6 @@
 
 ;; This should be the last line
 (require 'pref-site-config nil t)
+
+(provide 'init)
+;;; init.el ends here
