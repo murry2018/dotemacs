@@ -5,19 +5,13 @@
 ;;; Code:
 (require 'pref-lib)
 
-(defun pref.inner/disable-flymake-cc ()
-  "Disable the legacy `flymake-cc' backend in the current buffer."
-  (setq-local flymake-diagnostic-functions
-              (delq 'flymake-cc flymake-diagnostic-functions)))
-
 (use-package lsp-mode :ensure t
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook ((lsp-mode . lsp-enable-which-key-integration)
-         (lsp-managed-mode . pref.inner/disable-flymake-cc))
+  :hook (lsp-mode . lsp-enable-which-key-integration)
   :config
   (setopt lsp-semantic-tokens-enable t
-          lsp-diagnostics-provider :flymake
+          lsp-diagnostics-provider :flycheck
           lsp-enable-snippet nil)
   :commands lsp)
 

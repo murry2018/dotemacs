@@ -11,8 +11,7 @@
 
 ;; pref scripts
 (let ((pref-path (expand-file-name "lisp" user-emacs-directory)))
-  (push pref-path load-path)
-  (push pref-path elisp-flymake-byte-compile-load-path))
+  (push pref-path load-path))
 
 (require 'pref-config)
 (require 'pref-lib)
@@ -34,9 +33,10 @@
     (require 'pref-evil)
   (require 'pref-keymap))
 
-(use-package flymake :ensure nil
-  :hook (emacs-lisp-mode)
-  :commands (flymake-mode))
+(use-package flycheck :ensure t
+  :hook (after-init . global-flycheck-mode)
+  :config
+  (setopt flycheck-emacs-lisp-load-path 'inherit))
 
 (use-package projectile :ensure t
   :hook (after-init . projectile-mode)
