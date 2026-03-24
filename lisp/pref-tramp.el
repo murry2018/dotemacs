@@ -36,24 +36,24 @@
       enable-remote-dir-locals nil)
   ;; sudo
   (connection-local-set-profile-variables
-   'pref.inner/tramp-profile-sudo
+   'pref.tramp/profile-sudo
    ;; Disable auto-saving on `sudo' sessions.
    '((buffer-auto-save-file-name . nil)
      ;; Disable internal VC.
      (vc-handled-backends . nil)))
   (connection-local-set-profiles
    '(:application tramp :protocol "sudo")
-   'pref.inner/tramp-profile-sudo)
+   'pref.tramp/profile-sudo)
   ;; ssh
   (connection-local-set-profile-variables
-   'pref.inner/tramp-profile-ssh
+   'pref.tramp/profile-ssh
    ;; Disable check for symbolic link validity in dired buffers.
    '((dired-check-symlinks . nil)
      ;; Suppress reading the remote history file in shell.
      (shell-history-file-name . t)))
   (connection-local-set-profiles
    '(:application tramp :protocol "ssh")
-   'pref.inner/tramp-profile-ssh))
+   'pref.tramp/profile-ssh))
 
 ;; Use a package with TRAMP specific implementation of high-level operations.
 (use-package tramp-hlo :ensure t

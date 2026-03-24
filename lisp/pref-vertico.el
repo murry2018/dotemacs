@@ -9,7 +9,7 @@
 ;;
 
 (require 'consult nil t)
-(defun pref.inner/consult-symbol-search (&optional initial)
+(defun pref/consult-symbol-search (&optional initial)
   "Search for a matching line with `symbol-at-point' history support.
 Candidates are hidden until input is provided.
 INITIAL is initial search keyword.
@@ -53,7 +53,7 @@ Confirmed working with consult.el version 20260105.1624"
      :initial initial
      :state (consult--location-state candidates))))
 
-(defun pref.inner/consult-find-up (&optional dir initial)
+(defun pref/consult-find-up (&optional dir initial)
   "Search for files with `find' in DIR.
 Press `C-l' to move up to the parent directory and restart the search.
 If DIR is nil, use `default-directory'.
@@ -117,8 +117,8 @@ Confirmed working with consult.el version 20260105.1624"
           (setq continue nil)))))
     nil))
 
-(defun pref.inner/dont-check-remote (check)
-  "Run project CHECK unless `default-directory' is remote."
+(defun pref.consult/skip-project-on-remote (check)
+  "Run project CHECK when `default-directory' is NOT remote."
   (unless (file-remote-p default-directory)
     (consult--default-project-function check)))
 
@@ -142,8 +142,8 @@ Confirmed working with consult.el version 20260105.1624"
 
 (use-package consult :ensure t
   :bind (("C-x b" . consult-buffer)
-         ("C-s" . pref.inner/consult-symbol-search)
-         ("C-c F" . pref.inner/consult-find-up)
+         ("C-s" . pref/consult-symbol-search)
+         ("C-c F" . pref/consult-find-up)
          ("C-c l" . consult-line)
          ("C-c '" . consult-imenu))
   :init
@@ -158,7 +158,7 @@ Confirmed working with consult.el version 20260105.1624"
                          #'consult-ripgrep
                        #'consult-grep))
   :config
-  (setopt consult-project-function #'pref.inner/dont-check-remote))
+  (setopt consult-project-function #'pref.consult/skip-project-on-remote))
 
 (use-package embark :ensure t
   :bind (:map minibuffer-local-map

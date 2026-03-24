@@ -11,7 +11,7 @@
 ;; (See the use-package configuration for 'treesit' for related setup.)
 ;;
 ;;; Code:
-(defvar pref.inner/*treesit-remap-table*
+(defvar pref.treesit/remap-table
   '((:lang awk :mode awk-mode :remap-mode awk-ts-mode)
     (:lang bash :mode sh-mode :remap-mode bash-ts-mode)
     (:lang bibtex :mode bibtex-mode :remap-mode bibtex-ts-mode)
@@ -78,9 +78,9 @@ REMAP-MODE is the corresponding tree-sitter major mode symbol.
 This list is indebted to the original `treesit-auto-mode' source code by
 @renzmann.")
 
-(defvar pref.inner/*treesit-available-languages*)
+(defvar pref.treesit/available-languages)
 
-(cl-defun pref.inner/normalize-available-remap-list (&key lang mode remap-mode)
+(cl-defun pref.treesit/normalize-remap-list (&key lang mode remap-mode)
   "Normalize mode, and make a list of (MODE . REMAP-MODE).
 With LANG `treesit-language-available-p',
 If mode is a symbol, immediately returns ((MODE . REMAP-MODE)).
@@ -98,10 +98,10 @@ But with LANG not `treesit-language-available-p', it returns nil."
 
 (use-package treesit
   :init
-  (setf pref.inner/*treesit-available-languages*
-        (cl-loop for ent in pref.inner/*treesit-remap-table*
-                 nconc (apply #'pref.inner/normalize-available-remap-list ent)))
-  (setopt major-mode-remap-alist pref.inner/*treesit-available-languages*))
+  (setf pref.treesit/available-languages
+        (cl-loop for ent in pref.treesit/remap-table
+                 nconc (apply #'pref.treesit/normalize-remap-list ent)))
+  (setopt major-mode-remap-alist pref.treesit/available-languages))
 
 (use-package treesit-fold :ensure t
   :init

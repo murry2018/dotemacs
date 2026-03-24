@@ -3,11 +3,11 @@
 ;;; Commentary:
 ;;
 ;;; Code:
-(defvar pref/*use-treesitter* nil)
-(defvar pref/*use-iedit* nil)
-(defvar pref/*use-evil* t)
-(defvar pref.evil/*use-ijkl* nil)
-(defvar pref.non-evil/*use-movement-hydra* nil)
+(defvar pref/use-treesitter nil)
+(defvar pref/use-iedit nil)
+(defvar pref/use-evil nil)
+(defvar pref/use-evil-ijkl nil)
+(defvar pref/use-movement-hydra nil)
 
 (provide 'pref-config)
 ;;; pref-config.el ends here

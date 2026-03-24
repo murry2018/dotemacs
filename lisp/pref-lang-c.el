@@ -34,7 +34,7 @@
 (declare-function treesit-node-type "treesit.c" (node))
 (declare-function c-ts-mode--indent-styles "c-ts-mode" (mode))
 
-(defun pref.style/pref-lang-c ()
+(defun pref.lang-c/style ()
   "Define a customized indentation style based on BSD."
   (let* ((mode (if (derived-mode-p 'c-ts-mode) 'c 'c++))
          (bsd-style (alist-get 'bsd (c-ts-mode--indent-styles mode))))
@@ -62,10 +62,10 @@
       ;;; Derived from BSD
       ,@bsd-style)))
 
-(defun pref.inner/c-ts-mode-maybe-literal-tab ()
+(defun pref.lang-c/maybe-literal-tab ()
   "Insert a literal tab for preprocessor directives, otherwise indent."
   (interactive)
-  (if (and (eq c-ts-mode-indent-style #'pref.style/pref-lang-c)
+  (if (and (eq c-ts-mode-indent-style #'pref.lang-c/style)
            (or (save-excursion (back-to-indentation)
                                (looking-at-p "#"))
                (when-let* ((node (treesit-node-at (point))))
@@ -74,15 +74,15 @@
       (tab-to-tab-stop)
     (call-interactively #'indent-for-tab-command)))
 
-(defun pref.inner/c-ts-mode-hook ()
+(defun pref.lang-c/c-ts-mode-hook ()
   "Configure indentation style and keybindings for `c-ts-mode'."
-  (setopt c-ts-mode-indent-style #'pref.style/pref-lang-c)
-  (local-set-key (kbd "TAB") #'pref.inner/c-ts-mode-maybe-literal-tab)
-  (local-set-key (kbd "<tab>") #'pref.inner/c-ts-mode-maybe-literal-tab))
+  (setopt c-ts-mode-indent-style #'pref.lang-c/style)
+  (local-set-key (kbd "TAB") #'pref.lang-c/maybe-literal-tab)
+  (local-set-key (kbd "<tab>") #'pref.lang-c/maybe-literal-tab))
 
 (use-package c-ts-mode
   :defer t
-  :hook ((c-ts-mode c++-ts-mode) . pref.inner/c-ts-mode-hook)
+  :hook ((c-ts-mode c++-ts-mode) . pref.lang-c/c-ts-mode-hook)
   :config
   (setopt c-ts-mode-indent-offset 4))
 

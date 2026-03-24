@@ -26,12 +26,12 @@
 (require 'pref-vertico)
 (require 'pref-lsp)
 (require 'pref-slime)
-(when pref/*use-treesitter*
+(when pref/use-treesitter
   (require 'pref-treesit))
 (require 'pref-lang-c)
 (require 'pref-lang-clj)
 (require 'pref-lang-pta)
-(if pref/*use-evil*
+(if pref/use-evil
     (require 'pref-evil)
   (require 'pref-keymap))
 
@@ -62,7 +62,7 @@
 ;; iedit: Edit all occurrences of a symbol simultaneously.
 ;; (Toggle: C-; on a target symbol)
 (use-package iedit :ensure t
-  :if pref/*use-iedit*)
+  :if pref/use-iedit)
 
 ;; transpose-frame: Swap x/y direction of window splits or rotate them.
 ;; (M-x transpose-frame, M-x rotate-frame)

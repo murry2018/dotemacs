@@ -70,14 +70,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Evil Core
 ;;
-(defun pref.inner/after-evil-mode ()
+(defun pref.evil/after-evil-mode-hook ()
   "Actions after enter `evil-mode'."
   (electric-pair-local-mode -1)
   (evil-esc-mode 1))
 
 (use-package evil :ensure t
   :hook ((prog-mode . evil-local-mode)
-         (evil-local-mode . pref.inner/after-evil-mode))
+         (evil-local-mode . pref.evil/after-evil-mode-hook))
   :init
   (setopt evil-want-keybinding nil
           evil-want-integration t
@@ -89,14 +89,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Evil On Special Buffers
 ;;
-(defun pref.inner/enable-evil-on-splash ()
+(defun pref.evil/splash-buffer-hook ()
   "Enable `evil-motion' on *GNU Emacs* buffer."
   (when (and (string= (buffer-name) "*GNU Emacs*")
              (not evil-local-mode))
     (evil-local-mode 1)
     (evil-motion-state)))
 
-(defun pref.inner/enable-evil-on-file-backed-fundamental ()
+(defun pref.evil/file-backed-fundamental-mode-hook ()
   "Enable `evil-normal' on file-backed `fundamental-mode' buffer."
   (when (and (eq major-mode 'fundamental-mode)
              (buffer-file-name)
@@ -107,14 +107,14 @@
 
 (use-package evil :ensure nil
   :hook (((help-mode apropos-mode text-mode) . evil-local-mode)
-         (buffer-list-update . pref.inner/enable-evil-on-splash)
-         (after-change-major-mode . pref.inner/enable-evil-on-file-backed-fundamental))
+         (buffer-list-update . pref.evil/splash-buffer-hook)
+         (after-change-major-mode . pref.evil/file-backed-fundamental-mode-hook))
   :config
   ;; `motion-mode' on help buffers
   (evil-set-initial-state 'help-mode 'motion)
   (evil-set-initial-state 'apropos-mode 'motion))
 
-(defun pref.evil/toggle-emacs-normal-state ()
+(defun pref.evil/toggle-emacs-normal-state-hook ()
   "Toggle between `evil-emacs-state' and `evil-normal-state'."
   (when evil-local-mode
     (if (evil-emacs-state-p)
@@ -123,7 +123,7 @@
 
 (use-package magit :ensure nil
   :hook ((magit-blame-mode magit-blob-mode)
-         . pref.evil/toggle-emacs-normal-state))
+         . pref.evil/toggle-emacs-normal-state-hook))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Third-party
@@ -190,16 +190,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Keymap
 ;;
-(defvar pref.general/evil-semicolon-map nil)
-(defvar pref.general/evil-h-map nil)
+(defvar pref.evil/semicolon-map nil)
+(defvar pref.evil/h-map nil)
 
 (use-package general :ensure t
   :after evil
-  :if pref.evil/*use-ijkl*
+  :if pref/use-evil-ijkl
   :init
   (require 'general)
-  (setf pref.general/evil-semicolon-map (make-sparse-keymap))
-  (setf pref.general/evil-h-map (make-sparse-keymap))
+  (setf pref.evil/semicolon-map (make-sparse-keymap))
+  (setf pref.evil/h-map (make-sparse-keymap))
   :config
   (general-evil-setup t)
 
@@ -217,14 +217,14 @@
 
   (general-define-key
    :states '(normal motion visual operator)
-   ";" pref.general/evil-semicolon-map)
+   ";" pref.evil/semicolon-map)
 
   (general-define-key
    :states '(normal motion visual operator)
-   "h" pref.general/evil-h-map)
+   "h" pref.evil/h-map)
 
   (general-define-key
-   :keymaps 'pref.general/evil-semicolon-map
+   :keymaps 'pref.evil/semicolon-map
    "]" 'evil-forward-section-begin
    "[" 'evil-forward-section-end
    ")" 'evil-next-close-paren
@@ -235,7 +235,7 @@
    "s" 'evil-next-flyspell-error)
 
   (general-define-key
-   :keymaps 'pref.general/evil-h-map
+   :keymaps 'pref.evil/h-map
    "[" 'evil-backward-section-begin
    "]" 'evil-backward-section-end
    "(" 'evil-previous-open-paren

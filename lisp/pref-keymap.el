@@ -3,7 +3,7 @@
 ;;; Code:
 (require 'pref-config)
 
-(declare-function pref.inner/consult-symbol-search "pref-vertico")
+(declare-function pref/consult-symbol-search "pref-vertico")
 
 (use-package hydra :ensure t)
 
@@ -12,9 +12,9 @@
   (keymap-global-set "M-'" #'avy-goto-char-timer)
   (keymap-global-set "M-l" #'avy-goto-line))
 (with-eval-after-load "pref-vertico"
-  (keymap-global-set "C-c s" #'pref.inner/consult-symbol-search))
+  (keymap-global-set "C-c s" #'pref/consult-symbol-search))
 
-(when pref.non-evil/*use-movement-hydra*
+(when pref/use-movement-hydra
   (defhydra hydra-movement (global-map "M-m" :foreign-keys warn)
     "movement"
     ("n" next-line "Down" :column "Cursor")

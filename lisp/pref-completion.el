@@ -8,7 +8,7 @@
 ;; custom orderless dispatcher
 ;;
 
-(defun pref.inner/orderless-dispatch-if-bang (pattern _index _total)
+(defun pref.completion/orderless-dispatch-if-bang (pattern _index _total)
   "Match PATTERN literally if it starts with an exclamation mark.
 
 PATTERN is the current search component to examine.
@@ -39,7 +39,7 @@ using the remainder of the string."
   (add-to-list 'completion-category-overrides
     '(consult-location (styles . (orderless))))
   (setopt orderless-style-dispatchers
-    '(pref.inner/orderless-dispatch-if-bang)))
+    '(pref.completion/orderless-dispatch-if-bang)))
 
 (provide 'pref-completion)
 ;;; pref-completion.el ends here

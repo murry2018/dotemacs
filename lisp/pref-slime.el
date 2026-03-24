@@ -19,7 +19,7 @@
       :implementation (ros ("ros" "-Q" "run")
                            :coding-system utf-8-unix))))
 
-(defun pref.inner/resolve-slime-impls (impl-list)
+(defun pref.slime/resolve-impls (impl-list)
   "Make a `slime-lisp-implementations' list from given IMPL-LIST.
 Filter out programs(`:prog' member) that are not executable."
   (let ((valid-impls '()))
@@ -42,7 +42,7 @@ Filter out programs(`:prog' member) that are not executable."
   
   :config
   (setopt slime-lisp-implementations
-    (pref.inner/resolve-slime-impls *pref-lisp-impls*)
+    (pref.slime/resolve-impls *pref-lisp-impls*)
     lisp-slime-loop-indentation 1
     lisp-loop-keyword-indentation 6
     lisp-loop-forms-indentation 6))
