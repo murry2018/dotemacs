@@ -15,6 +15,7 @@
     avy-goto-char-in-line
     avy-goto-char-timer
     avy-goto-subword-0
+    avy-goto-subword-1
     avy-goto-whitespace-end
     ))
 

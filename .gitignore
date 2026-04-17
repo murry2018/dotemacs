@@ -1,0 +1,15 @@
+*~
+elpa/
+transient/
+eln-cache/
+
+bookmarks
+recentf
+places
+history
+projectile-bookmarks.eld
+projects
+.lsp-session-v1
+
+tramp-cache.el
+custom.el
