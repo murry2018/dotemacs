@@ -34,6 +34,7 @@
 (if pref/use-evil
     (require 'pref-evil)
   (require 'pref-keymap))
+(require 'pref-non-english)
 
 (use-package flycheck :ensure t
   :hook (after-init . global-flycheck-mode)
