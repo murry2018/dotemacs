@@ -28,12 +28,12 @@
 (require 'pref-slime)
 (when pref/use-treesitter
   (require 'pref-treesit))
+;; languages
 (require 'pref-lang-c)
 (require 'pref-lang-clj)
 (require 'pref-lang-pta)
-(if pref/use-evil
-    (require 'pref-evil)
-  (require 'pref-keymap))
+;; keymaps
+(require 'pref-keymap)
 (require 'pref-non-english)
 
 (use-package flycheck :ensure t
