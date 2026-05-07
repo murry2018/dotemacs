@@ -59,6 +59,14 @@ Example:
         (set-default alist-symbol alist)
       (set alist-symbol alist))))
 
+(defun pref/fst (list)
+  "Pick first item from LIST."
+  (car list))
+
+(defun pref/snd (list)
+  "Pick second item from LIST."
+  (cadr list))
+
 (provide 'pref-lib)
 ;;; pref-lib.el ends here
 
