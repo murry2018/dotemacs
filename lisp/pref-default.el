@@ -53,6 +53,7 @@
 ;;; Remembers recently opened files
 ;;; (affects functions like find-file, switch-to-buffer, etc.)
 (recentf-mode 1)
+(keymap-global-set "C-c ." #'recentf)
 
 ;; Use `savehist-mode'
 ;;; Remembers minibuffer history
@@ -85,6 +86,9 @@
 ;; Which-key mode
 ;;; Shows a pop-up with key completions after a prefix key
 (which-key-mode 1)
+
+;; Repeat-mode
+(repeat-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Default Variables

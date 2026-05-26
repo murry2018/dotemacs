@@ -142,7 +142,7 @@ Confirmed working with consult.el version 20260105.1624"
 
 (use-package consult :ensure t
   :bind (("C-x b" . consult-buffer)
-         ("C-s" . pref/consult-symbol-search)
+         ("C-c s" . pref/consult-symbol-search)
          ("C-c F" . pref/consult-find-up)
          ("C-c l" . consult-line)
          ("C-c '" . consult-imenu))

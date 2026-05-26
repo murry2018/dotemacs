@@ -33,7 +33,6 @@
 (require 'pref-lang-clj)
 (require 'pref-lang-pta)
 ;; keymaps
-(require 'pref-keymap)
 (when pref/use-evil
   (require 'pref-evil))
 (require 'pref-non-english)
@@ -94,6 +93,11 @@
 ;; fold-this: Fold the selected region of text.
 ;; (Fold: M-x fold-this, Unfold: M-x fold-this-unfold-at-point)
 (use-package fold-this :ensure t)
+
+(use-package avy :ensure t
+  :bind (("M-'" . #'avy-goto-char-timer)
+         ("M-l" . #'avy-goto-line)
+         ("M-g c" . #'avy-goto-subword-1)))
 
 ;; This should be the last line
 (require 'pref-site-config nil t)
