@@ -81,6 +81,9 @@ If BACKWARD is non-nil, move backward; otherwise, move forward."
   (evil-define-key 'normal 'global (kbd "<leader>f") #'find-file)
   (evil-define-key 'normal 'global (kbd "<leader>.") #'recentf)
   (evil-define-key 'normal 'global (kbd "<leader>b") #'switch-to-buffer)
+  (with-eval-after-load "embark"
+    (evil-define-key 'normal 'global (kbd "C-.") #'embark-act)
+    (evil-define-key 'normal 'global (kbd "M-.") #'embark-dwim))
   (with-eval-after-load "consult"
     (evil-define-key 'normal 'global (kbd "<leader>.") #'consult-recent-file)
     (evil-define-key 'normal 'global (kbd "<leader>r") #'consult-ripgrep)

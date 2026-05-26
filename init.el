@@ -99,6 +99,13 @@
          ("M-l" . #'avy-goto-line)
          ("M-g c" . #'avy-goto-subword-1)))
 
+(use-package embark :ensure t
+  :bind (("C-." . embark-act)
+         ("M-." . embark-dwim)
+         ("C-h B" . embark-bindings))
+  :init
+  (setopt prefix-help-command #'embark-prefix-help-command))
+
 ;; This should be the last line
 (require 'pref-site-config nil t)
 
