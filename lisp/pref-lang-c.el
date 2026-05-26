@@ -3,12 +3,6 @@
 ;;; Code:
 (require 'pref-lib)
 
-(use-package ccls :ensure nil
-  ;; :straight nil
-  ;; We do not ensure ccls here, as it appears to take precedence
-  ;; over clangd if installed.
-  :if (locate-library "ccls"))
-
 (use-package lsp-mode
   :hook ((c++-mode c-mode c-ts-mode c++-ts-mode) . lsp)
   :config
