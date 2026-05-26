@@ -34,6 +34,8 @@
 (require 'pref-lang-pta)
 ;; keymaps
 (require 'pref-keymap)
+(when pref/use-evil
+  (require 'pref-evil))
 (require 'pref-non-english)
 
 (use-package flycheck :ensure t
