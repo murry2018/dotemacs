@@ -46,7 +46,7 @@ If BACKWARD is non-nil, move backward; otherwise, move forward."
       '(evil-WORD . pref.evil/forward-evil-WORD-provider)))
   ;; Override the original function to ensure that any direct calls to
   ;; `forward-evil-WORD' also use customized definition.
-  ;; (advice-add 'forward-evil-WORD :override #'pref.evil/forward-evil-WORD)
+  (advice-add 'forward-evil-WORD :override #'pref.evil/forward-evil-WORD)
 
   ;; -- Customize emacs behaviors to fit `evil-mode' --
   (setopt display-line-numbers-type 'relative)
