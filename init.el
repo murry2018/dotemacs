@@ -19,92 +19,16 @@
 (require 'pref-lib)
 (require 'pref-default)
 (require 'pref-ui)
-(require 'pref-org)
+(require 'pref-non-english)
 (require 'pref-tramp)
-(require 'pref-vterm)
 (require 'pref-completion)
 (require 'pref-vertico)
-(require 'pref-lsp)
-(require 'pref-slime)
 (when pref/use-treesitter
   (require 'pref-treesit))
-;; languages
-(require 'pref-lang-c)
-(require 'pref-lang-clj)
-(require 'pref-lang-pta)
-;; keymaps
 (when pref/use-evil
   (require 'pref-evil))
-(require 'pref-non-english)
-
-(use-package flycheck :ensure t
-  :hook (after-init . global-flycheck-mode)
-  :config
-  (setopt flycheck-emacs-lisp-load-path 'inherit))
-
-(use-package projectile :ensure t
-  :hook (after-init . projectile-mode)
-  :bind (:map projectile-mode-map
-          ("C-c p" . projectile-command-map))
-  :config
-  (setopt projectile-enable-caching t
-          projectile-indexing-method 'alien))
-
-;; magit: The standard Git interface for Emacs.
-;; (Status: C-x g; Help: '?' inside magit buffer for command list)
-(use-package magit :ensure t
-  :when (executable-find "git")
-  :config
-  (setopt magit-define-global-key-bindings 'recommended))
-
-;; wgrep: Edit grep/occur buffers directly and save to files.
-;; (Start: C-c C-p, Apply: C-x C-s, Abort: C-c C-k)
-(use-package wgrep :ensure t)
-
-;; iedit: Edit all occurrences of a symbol simultaneously.
-;; (Toggle: C-; on a target symbol)
-(use-package iedit :ensure t
-  :if pref/use-iedit)
-
-;; transpose-frame: Swap x/y direction of window splits or rotate them.
-;; (M-x transpose-frame, M-x rotate-frame)
-(use-package transpose-frame :ensure t)
-
-;; ace-window: Switch windows using visual character hints
-;; (Jump: M-o)
-(use-package ace-window :ensure t
-  :bind ("M-o" . ace-window)
-  :demand t
-  :config
-  (setq aw-keys '(?a ?s ?d ?f ?z ?x ?c ?v))
-  (let* ((is-gui (display-graphic-p))
-         (font-height (if is-gui 2.5 1.0))
-         (fg-color (if is-gui "chartreuse" "green")))
-    (set-face-attribute
-     'aw-leading-char-face nil
-     :foreground fg-color :height font-height :weight 'bold
-     :box (when is-gui ; `box' might not work on terminal
-            '(:line-width 2 :color "grey75" :style released-button)))))
-
-;; surround: Vim-like surround operations for delimiters (parens, quotes).
-;; (Usage: Bind `surround-keymap' to a key to use)
-(use-package surround :ensure t)
-
-;; fold-this: Fold the selected region of text.
-;; (Fold: M-x fold-this, Unfold: M-x fold-this-unfold-at-point)
-(use-package fold-this :ensure t)
-
-(use-package avy :ensure t
-  :bind (("M-'" . #'avy-goto-char-timer)
-         ("M-l" . #'avy-goto-line)
-         ("M-g c" . #'avy-goto-subword-1)))
-
-(use-package embark :ensure t
-  :bind (("C-." . embark-act)
-         ("M-." . embark-dwim)
-         ("C-h B" . embark-bindings))
-  :init
-  (setopt prefix-help-command #'embark-prefix-help-command))
+(require 'pref-packages)
+(require 'pref-langs)
 
 ;; This should be the last line
 (require 'pref-site-config nil t)
