@@ -67,6 +67,7 @@
 
 ;; embark: Emacs native context-menu
 (use-package embark :ensure t
+  :demand t
   :bind (("C-." . embark-act)
          ("M-." . embark-dwim)
          ("C-h B" . embark-bindings))
