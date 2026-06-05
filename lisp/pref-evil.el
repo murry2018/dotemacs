@@ -76,11 +76,17 @@ If BACKWARD is non-nil, move backward; otherwise, move forward."
 
   ;; -- Register leader key keymap --
   (evil-set-leader 'normal (kbd "SPC"))
+  (evil-define-key 'motion 'global (kbd "gl") #'goto-line)
+  (evil-define-key 'motion 'global (kbd ",") #'evil-first-non-blank)
+  (evil-define-key 'motion 'global (kbd ".") #'evil-last-non-blank)
+  (evil-define-key 'normal 'global (kbd ".") #'evil-last-non-blank)
   (evil-define-key 'normal 'global (kbd "<leader>x") #'execute-extended-command)
   (evil-define-key 'normal 'global (kbd "<leader>o") #'other-window)
   (evil-define-key 'normal 'global (kbd "<leader>f") #'find-file)
   (evil-define-key 'normal 'global (kbd "<leader>.") #'recentf)
   (evil-define-key 'normal 'global (kbd "<leader>b") #'switch-to-buffer)
+  (with-eval-after-load "ace-window"
+    (evil-define-key 'normal 'global (kbd "<leader>o") #'ace-window))
   (with-eval-after-load "embark"
     (evil-define-key 'normal 'global (kbd "C-.") #'embark-act)
     (evil-define-key 'normal 'global (kbd "M-.") #'embark-dwim))
@@ -95,8 +101,9 @@ If BACKWARD is non-nil, move backward; otherwise, move forward."
     (evil-define-key 'normal 'global (kbd "<leader>pf") #'projectile-find-file))
   (with-eval-after-load "avy"
     (evil-define-key 'normal 'global (kbd "<leader>'") #'avy-goto-char-timer)
-    (evil-define-key 'normal 'global (kbd "f") #'avy-goto-subword-1)
-    (evil-define-key 'visual 'global (kbd "f") #'avy-goto-subword-1)
+    (evil-define-key 'normal 'global (kbd "<leader>l") #'avy-goto-line)
+    (evil-define-key 'normal 'global (kbd "f") #'avy-goto-char-in-line)
+    (evil-define-key 'visual 'global (kbd "f") #'avy-goto-char-in-line)
     (evil-define-key 'normal 'global (kbd "F") #'avy-goto-char-timer)
     (evil-define-key 'visual 'global (kbd "F") #'avy-goto-char-timer)))
 
