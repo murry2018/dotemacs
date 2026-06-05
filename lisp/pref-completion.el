@@ -32,7 +32,7 @@ using the remainder of the string."
 
 (use-package orderless :ensure t
   :init
-  (setopt completion-styles '(basic orderless)
+  (setopt completion-styles '(orderless)
           completion-category-defaults nil)
   (add-to-list 'completion-category-overrides
     '(file (styles . (basic partial-completion))))
