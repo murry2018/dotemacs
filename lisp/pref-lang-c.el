@@ -3,11 +3,15 @@
 ;;; Code:
 (require 'pref-lib)
 
-(use-package lsp-mode
-  :hook ((c++-mode c-mode c-ts-mode c++-ts-mode) . lsp)
+(use-package eglot
+  :hook ((c++-mode c-mode c-ts-mode c++-ts-mode) . eglot-ensure)
   :config
-  (setopt lsp-enable-on-type-formatting nil
-          lsp-enable-indentation nil))
+  (add-to-list 'eglot-ignored-server-capabilities :documentOnTypeFormattingProvider))
+
+(use-package eglot-inactive-regions :ensure t
+  :config
+  (eglot-inactive-regions-mode 1)
+  (setq eglot-inactive-regions-style 'shadow-face))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Syntax-aware Indentation Configuration

@@ -2,11 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package flycheck :ensure t
-  :hook (after-init . global-flycheck-mode)
-  :config
-  (setopt flycheck-emacs-lisp-load-path 'inherit))
-
 (use-package projectile :ensure t
   :hook (after-init . projectile-mode)
   :bind (:map projectile-mode-map
@@ -84,6 +79,11 @@
   :hook (vterm-mode . pref.vterm/disable-hl-line-hook)
   :config
   (setopt vterm-max-scrollback 10000))
+
+(use-package breadcrumb
+  :init
+  (breadcrumb-mode))
+
 
 (provide 'pref-packages)
 ;;; pref-packages.el ends here
