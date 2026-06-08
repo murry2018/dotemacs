@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; LSP
-(require 'pref-lsp)
-
 ;; clojure
 (use-package cider :ensure t)
 
