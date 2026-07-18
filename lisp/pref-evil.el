@@ -34,6 +34,11 @@ If BACKWARD is non-nil, move backward; otherwise, move forward."
         evil-want-fine-undo t
         evil-undo-system 'undo-fu)
 
+;; -- evil configuration --
+(use-package evil :ensure t)
+(use-package evil-collection :ensure t :after evil)
+(use-package evil-surround :ensure t :after evil)
+
 (when (require 'evil nil t)
   ;; -- Customize the definition of a WORD --
   (setopt evil-bigword "^]\n\r\t\f ()[{},/") ; default + braces + separator

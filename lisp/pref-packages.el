@@ -80,10 +80,11 @@
   :config
   (setopt vterm-max-scrollback 10000))
 
-(use-package breadcrumb
+(use-package eat :ensure t)
+
+(use-package breadcrumb :ensure t
   :init
   (breadcrumb-mode))
-
 
 (provide 'pref-packages)
 ;;; pref-packages.el ends here

@@ -34,9 +34,11 @@ using the remainder of the string."
   :init (global-corfu-mode))
 
 (unless pref/use-completion-at-point
-  (require 'vertico)
-  (require 'consult)
-  (setopt completion-in-region-function #'consult-completion-in-region))
+  (with-eval-after-load 'vertico
+    (with-eval-after-load 'consult
+      (require 'vertico)
+      (require 'consult)
+      (setopt completion-in-region-function #'consult-completion-in-region))))
   
 
 (use-package orderless :ensure t
