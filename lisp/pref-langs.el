@@ -13,6 +13,9 @@
 ;; C/C++
 (require 'pref-lang-c)
 
+;; Java
+(require 'pref-lang-java)
+
 ;; Lisp
 (require 'pref-slime)
 

@@ -4,6 +4,8 @@
 ;;
 ;;; Code:
 
+(require 'pref-config)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; custom orderless dispatcher
 ;;
@@ -28,7 +30,14 @@ using the remainder of the string."
 ;;
 
 (use-package corfu :ensure t
+  :when pref/use-completion-at-point
   :init (global-corfu-mode))
+
+(unless pref/use-completion-at-point
+  (require 'vertico)
+  (require 'consult)
+  (setopt completion-in-region-function #'consult-completion-in-region))
+  
 
 (use-package orderless :ensure t
   :init
