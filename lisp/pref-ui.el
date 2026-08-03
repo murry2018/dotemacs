@@ -15,6 +15,8 @@
 ;;; The default setting is 'light, which doesn't fit since most modern terminal
 ;;; emulators use a dark background.
 (when (not (display-graphic-p))
+  (global-hl-line-mode -1) ;; too many blinking
+  (setopt visible-bell nil)
   (setopt frame-background-mode 'dark)
   (mapc 'frame-set-background-mode (frame-list)))
 
@@ -65,6 +67,50 @@ Combines `pref/font-family' and `pref/font-size'."
 
 (mapc #'pref.ui/after-make-frame-hook (frame-list))
 (add-hook 'after-make-frame-functions #'pref.ui/after-make-frame-hook)
+
+(defun pref.ui/terminal-supports-decscusr-p ()
+  "Check if current terminal supports DECSUSR."
+  (and (not (display-graphic-p))
+       (or
+        (getenv "VTE_VERSION")         ; VTE-based terminals(inc. GNOME Term.)
+        (member (getenv "TERM_PROGRAM") ; Popular terminal clients
+                '("iTerm.app" "WezTerm" "ghostty" "Hyper" "Rio" "Tabby"
+                  "Alacritty" "Apple_Terminal"))
+        (getenv "KITTY_PID")
+        (getenv "KONSOLE_PROFILE_NAME")
+        (getenv "WT_SESSION")                 ; Windows Terminal
+        (getenv "XTERM_VERSION")
+        (getenv "ALACRITTY_WINDOW_ID")
+        (string-prefix-p "alacritty" (or (getenv "TERM") ""))
+        (string-prefix-p "foot" (or (getenv "TERM") ""))
+        (and (string-match-p "xterm\\|rxvt\\|vte\\|gnome\\|screen\\|tmux"
+                             (or (getenv "TERM") ""))
+             ;; Exclude legacy linux termianls, due to their generally
+             ;; restricted cursor control features.
+             (not (string-equal (getenv "TERM") "linux"))))))
+
+(defun pref.ui/force-decscusr-advice (&rest _)
+  "Send DECSUSR sequence to terminal corresponding to given CURSOR-TYPE."
+  (when (and (not (display-graphic-p))
+             cursor-type)
+    (let* ((type (if (consp cursor-type) (car cursor-type) cursor-type))
+           (seq (pcase type
+                  ('box  "\e[2 q")   ; steady block
+                  ('bar  "\e[6 q")   ; steady bar
+                  ('hbar "\e[4 q")   ; steady underline
+                  (_     "\e[2 q"))))
+      (send-string-to-terminal seq))))
+
+(when (pref.ui/terminal-supports-decscusr-p)
+  (setq-default visible-cursor nil)
+
+  (add-variable-watcher 'cursor-type
+                        (lambda (_sym _newval op _where)
+                          (when (eq op 'set)
+                            (pref.ui/force-decscusr-advice))))
+  (with-eval-after-load 'evil
+    (advice-add 'evil-set-cursor :after
+                #'pref.ui/force-decscusr-advice)))
 
 (provide 'pref-ui)
 ;;; pref-ui.el ends here
