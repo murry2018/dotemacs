@@ -35,6 +35,7 @@ If BACKWARD is non-nil, move backward; otherwise, move forward."
         evil-undo-system 'undo-fu)
 
 ;; -- evil configuration --
+(use-package undo-fu :ensure t)
 (use-package evil :ensure t)
 (use-package evil-collection :ensure t :after evil)
 (use-package evil-surround :ensure t :after evil)
