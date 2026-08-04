@@ -10,7 +10,7 @@
 ;; development versions of Emacs. In these instances, simply install the
 ;; latest compat package (M-x package-install RET compat RET).
 (when (and (version< emacs-version "31")
-           (package-installed-p "compat"))
+           (package-installed-p 'compat))
   (require 'compat nil t))
 
 ;; Custom file
