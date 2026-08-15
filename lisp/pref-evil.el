@@ -66,6 +66,10 @@ If BACKWARD is non-nil, move backward; otherwise, move forward."
   (setopt evil-collection-magit-use-y-for-yank t)
   (setopt evil-collection-magit-visit-worktree-file-on-return nil)
   (evil-collection-init)
+  (with-eval-after-load 'org
+    (evil-define-key 'normal org-mode-map
+      "gj" 'evil-next-visual-line
+      "gk" 'evil-previous-visual-line))
 
   ;; -- `evil-surround' configuration --
   (global-evil-surround-mode 1)
